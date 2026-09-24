@@ -1,21 +1,22 @@
 <!--meta
 {
   "slug": "index",
-  "title": "AudioBridge — Stream Mac Audio to Android over USB or Wi-Fi",
-  "ogTitle": "AudioBridge — your Mac's audio on your Android phone",
+  "title": "Tethertone — Stream Mac Audio to Android over USB or Wi-Fi",
+  "ogTitle": "Tethertone — your Mac's audio on your Android phone",
   "description": "Free, open-source app that streams your Mac's audio to your Android phone over USB or Wi-Fi. Lossless PCM, low latency, QR pairing. macOS 14+ and Android 8+.",
   "jsonLd": [
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
-      "name": "AudioBridge",
+      "name": "Tethertone",
       "url": "{{siteUrl}}/",
       "description": "Stream your Mac's audio to your Android phone over USB or Wi-Fi."
     },
     {
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
-      "name": "AudioBridge",
+      "name": "Tethertone",
+      "alternateName": "AudioBridge",
       "description": "Streams a Mac's system audio to an Android phone over USB or Wi-Fi as lossless PCM, with QR pairing, a jitter buffer and continuous clock-drift correction.",
       "applicationCategory": "MultimediaApplication",
       "operatingSystem": "macOS 14 or later, Android 8.0 or later",
@@ -27,13 +28,13 @@
       "downloadUrl": "{{releases}}",
       "image": "{{siteUrl}}/assets/img/og-image.png",
       "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-      "author": { "@type": "Organization", "name": "AudioBridge contributors", "url": "{{repo}}" },
+      "author": { "@type": "Organization", "name": "Tethertone contributors", "url": "{{repo}}" },
       "sameAs": ["{{repo}}"]
     },
     {
       "@context": "https://schema.org",
       "@type": "SoftwareSourceCode",
-      "name": "AudioBridge",
+      "name": "Tethertone",
       "codeRepository": "{{repo}}",
       "programmingLanguage": ["Swift", "Kotlin"],
       "license": "https://opensource.org/licenses/MIT",
@@ -43,11 +44,11 @@
       "@context": "https://schema.org",
       "@type": "FAQPage",
       "mainEntity": [
-        { "@type": "Question", "name": "Can I use my Android phone as a speaker for my Mac?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Install AudioBridge on the Mac and on the phone, press Start on the Mac and scan the QR code with the phone. Everything the Mac plays is then streamed to the phone's speaker or headphones, over a USB cable or Wi-Fi." } },
-        { "@type": "Question", "name": "Is AudioBridge free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. AudioBridge is free and open source under the MIT License. There are no ads, no accounts, no subscriptions and no tracking." } },
+        { "@type": "Question", "name": "Can I use my Android phone as a speaker for my Mac?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Install Tethertone on the Mac and on the phone, press Start on the Mac and scan the QR code with the phone. Everything the Mac plays is then streamed to the phone's speaker or headphones, over a USB cable or Wi-Fi." } },
+        { "@type": "Question", "name": "Is Tethertone free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Tethertone is free and open source under the MIT License. There are no ads, no accounts, no subscriptions and no tracking." } },
         { "@type": "Question", "name": "Does it work over USB or only over Wi-Fi?", "acceptedAnswer": { "@type": "Answer", "text": "Both. Over USB it uses adb reverse, which needs USB debugging on the phone and adb on the Mac. Over Wi-Fi both devices must be on the same network. The pairing code lists every route and the phone uses whichever answers first, so the cable wins when it is plugged in." } },
-        { "@type": "Question", "name": "How much latency does AudioBridge add?", "acceptedAnswer": { "@type": "Answer", "text": "Latency is mostly the phone's jitter buffer, which you set between 20 and 250 ms; the default is 90 ms. Measured on USB with the default setting, the buffer held between 40 and 110 ms with no lost packets. Lower settings reduce latency at the cost of more dropouts on a busy network." } },
-        { "@type": "Question", "name": "Why does macOS ask for Screen Recording permission?", "acceptedAnswer": { "@type": "Answer", "text": "The default capture method uses ScreenCaptureKit, the only macOS API that provides the whole system audio mix without a virtual driver. It has no audio-only mode, so macOS files it under screen recording. AudioBridge never reads an image. To avoid the permission, install BlackHole and switch the capture method to BlackHole, which needs only the Microphone permission." } },
+        { "@type": "Question", "name": "How much latency does Tethertone add?", "acceptedAnswer": { "@type": "Answer", "text": "Latency is mostly the phone's jitter buffer, which you set between 20 and 250 ms; the default is 90 ms. Measured on USB with the default setting, the buffer held between 40 and 110 ms with no lost packets. Lower settings reduce latency at the cost of more dropouts on a busy network." } },
+        { "@type": "Question", "name": "Why does macOS ask for Screen Recording permission?", "acceptedAnswer": { "@type": "Answer", "text": "The default capture method uses ScreenCaptureKit, the only macOS API that provides the whole system audio mix without a virtual driver. It has no audio-only mode, so macOS files it under screen recording. Tethertone never reads an image. To avoid the permission, install BlackHole and switch the capture method to BlackHole, which needs only the Microphone permission." } },
         { "@type": "Question", "name": "Do I need BlackHole or Soundflower?", "acceptedAnswer": { "@type": "Answer", "text": "No. The default Screen Recording method needs nothing installed. BlackHole is an optional alternative for people who prefer not to grant the Screen Recording permission." } },
         { "@type": "Question", "name": "Is the audio encrypted?", "acceptedAnswer": { "@type": "Answer", "text": "No. A random token in the QR code stops other people on your network from connecting, but the audio itself travels unencrypted. On a network you do not trust, use the USB cable or a VPN such as Tailscale." } },
         { "@type": "Question", "name": "Does it work with iPhone, Windows or Linux?", "acceptedAnswer": { "@type": "Answer", "text": "Not yet. The sender is a macOS app and the receiver is an Android app. The wire protocol is documented, so other senders and receivers can be built on it." } },
@@ -61,9 +62,9 @@
 <section class="hero">
   <div class="container hero-grid">
     <div class="hero-copy">
-      <a class="pill" href="{{releases}}" rel="noopener"><b>New</b><span>Version <span data-version>{{version}}</span> is out — first public release</span></a>
+      <a class="pill" href="{{releases}}" rel="noopener"><b>New</b><span>Version <span data-version>{{version}}</span>: AudioBridge is now Tethertone</span></a>
       <h1>Your Mac's audio,<br><span class="gradient-text">on your Android phone.</span></h1>
-      <p class="lead">AudioBridge streams everything your Mac plays to your Android phone, over a USB cable or Wi-Fi. It's lossless, keeps latency low for hours, and pairs with one QR scan. Free, open source and native on both sides.</p>
+      <p class="lead">Tethertone streams everything your Mac plays to your Android phone, over a USB cable or Wi-Fi. It's lossless, keeps latency low for hours, and pairs with one QR scan. Free, open source and native on both sides.</p>
       <div class="hero-cta">
         <a class="btn btn-primary btn-lg" href="{{dmg}}" data-asset="-macos.dmg">{{icon.apple}}<span class="btn-label">Download for Mac<small>macOS 14+ · Apple Silicon &amp; Intel</small></span></a>
         <a class="btn btn-secondary btn-lg" href="{{apk}}" data-asset="-android.apk">{{icon.android}}<span class="btn-label">Get the Android app<small>Android 8.0+ · APK</small></span></a>
@@ -75,70 +76,41 @@
       </ul>
     </div>
 
-    <div class="hero-art" role="img" aria-label="Illustration: the AudioBridge menu on a Mac streaming over USB and Wi-Fi to the AudioBridge app on an Android phone, which shows a live level meter and connection stats.">
+    <div class="hero-art" role="img" aria-label="Illustration: the Tethertone menu on a Mac streaming over USB and Wi-Fi to the Tethertone app on an Android phone, which shows a level meter and connection stats.">
       <div class="mock mock-mac" aria-hidden="true">
-        <div class="mock-mac-header">
-          <div class="mock-traffic-lights">
-            <span class="tl-dot tl-red"></span>
-            <span class="tl-dot tl-yellow"></span>
-            <span class="tl-dot tl-green"></span>
-          </div>
-          <span class="mock-mac-appname">AudioBridge</span>
-          <span class="mock-mac-status-tag">Streaming</span>
-        </div>
+        <div class="mock-menubar"><span>Wed 9:41</span><span class="mb-icon"><svg viewBox="0 0 12 12"><path d="M2 8V6M4.5 9V3M7 10V2M9.5 8V4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span></div>
         <div class="mock-body">
           <div class="mock-row">
-            <div><div class="mock-title">System Audio Broadcast</div><div class="mock-sub">Core Audio · 48,000 Hz · Stereo</div></div>
+            <div><div class="mock-title">Tethertone</div><div class="mock-sub">Streaming to 1 device</div></div>
             <span class="dot pulse"></span>
           </div>
           <div class="mock-seg"><span class="on">Screen Recording</span><span>BlackHole</span></div>
           <div class="mock-client">
-            <div class="mock-row"><strong>Pixel 9 Pro</strong><span class="mock-badge-usb">USB 3.0</span></div>
-            <code>rtt 1.8ms · buf 88ms · +204 ppm</code>
-            <div class="mock-client-wave">
-              <span style="--h:4px;--d:-.1s"></span><span style="--h:9px;--d:-.4s"></span><span style="--h:6px;--d:-.2s"></span><span style="--h:11px;--d:-.6s"></span><span style="--h:8px;--d:-.3s"></span><span style="--h:5px;--d:-.15s"></span><span style="--h:10px;--d:-.5s"></span><span style="--h:4px;--d:-.25s"></span>
-            </div>
+            <div class="mock-row"><strong>Pixel 9</strong><span class="mock-badge">USB</span></div>
+            <code>rtt 2ms · buf 88ms · +204 ppm</code>
           </div>
-          <div class="mock-btn">■ Stop Broadcast</div>
-          <div class="mock-btn secondary">Open AudioBridge…</div>
+          <div class="mock-btn">■ Stop</div>
+          <div class="mock-btn secondary">Open Tethertone…</div>
         </div>
       </div>
 
       <div class="link" aria-hidden="true">
-        <div class="link-line"><span class="link-label">USB cable</span><i></i><i></i><i></i></div>
-        <div class="link-line dashed"><span class="link-label">Wi-Fi LAN</span><i></i><i></i><i></i></div>
+        <div class="link-line"><span class="link-label">USB</span><i></i><i></i><i></i></div>
+        <div class="link-line dashed"><span class="link-label">Wi-Fi</span><i></i><i></i><i></i></div>
       </div>
 
       <div class="mock-phone" aria-hidden="true">
         <div class="phone-screen">
-          <div class="phone-speaker-notch"></div>
-          <div class="phone-header">
-            <div class="app-title">AudioBridge</div>
-            <span class="stream-badge">LIVE</span>
-          </div>
-          <div class="status-card"><strong><span class="dot pulse"></span>Streaming over USB</strong><span>Studio Mac · 48 kHz stereo · 10ms</span></div>
-          <div class="meter-container">
-            <div class="meter-channel">
-              <span class="meter-label">L</span>
-              <div class="meter-bars">
-                <i style="--h:55%;--d:-.2s"></i><i style="--h:80%;--d:-.5s"></i><i style="--h:65%;--d:-.1s"></i><i style="--h:95%;--d:-.7s"></i><i style="--h:70%;--d:-.35s"></i><i style="--h:85%;--d:-.9s"></i><i style="--h:50%;--d:-.25s"></i>
-              </div>
-            </div>
-            <div class="meter-channel">
-              <span class="meter-label">R</span>
-              <div class="meter-bars">
-                <i style="--h:50%;--d:-.15s"></i><i style="--h:75%;--d:-.45s"></i><i style="--h:60%;--d:-.2s"></i><i style="--h:90%;--d:-.65s"></i><i style="--h:72%;--d:-.3s"></i><i style="--h:80%;--d:-.85s"></i><i style="--h:48%;--d:-.2s"></i>
-              </div>
-            </div>
-            <div class="meter-scale"><span>-24dB</span><span>-12dB</span><span>-6dB</span><span>0dB</span></div>
-          </div>
+          <div class="app-title">Tethertone</div>
+          <div class="status-card"><strong><span class="dot"></span>Streaming over USB</strong><span>Studio Mac · 48 kHz stereo</span></div>
+          <div class="meter"><i style="--d:-.2s"></i><i style="--d:-.5s"></i><i style="--d:-.1s"></i><i style="--d:-.7s"></i><i style="--d:-.35s"></i><i style="--d:-.9s"></i><i style="--d:-.25s"></i><i style="--d:-.6s"></i><i style="--d:-.45s"></i><i style="--d:-.15s"></i></div>
           <div class="tiles">
             <div><b>88</b><span>buffer ms</span></div>
             <div><b>1536</b><span>kbit/s</span></div>
             <div><b>0</b><span>underruns</span></div>
-            <div><b>0</b><span>dropped</span></div>
+            <div><b>0</b><span>lost packets</span></div>
           </div>
-          <div class="drift"><b>Clock drift: +204 ppm</b>playing 204 ppm fast to drain the buffer</div>
+          <div class="drift"><b>Clock drift</b>playing 204 ppm fast to drain the buffer</div>
         </div>
       </div>
     </div>
@@ -178,7 +150,7 @@
       <article class="feature">
         <div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M12 7v5l3 2M21 12a9 9 0 11-9-9"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M17 3l4 0 0 4"/></svg></div>
         <h3>Stays in sync for hours</h3>
-        <p>Two devices never agree on how long a second is. AudioBridge corrects the difference continuously by playing a fraction of a percent fast or slow. It's inaudible, with no jumps and no creeping delay.</p>
+        <p>Two devices never agree on how long a second is. Tethertone corrects the difference continuously by playing a fraction of a percent fast or slow. It's inaudible, with no jumps and no creeping delay.</p>
       </article>
       <article class="feature">
         <div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h2v2h-2zM18 18h2v2h-2zM14 18h2M18 14h2"/></svg></div>
@@ -207,7 +179,7 @@
       <p class="lead">No accounts, no drivers, no Audio MIDI Setup unless you want it.</p>
     </div>
     <ol class="steps">
-      <li><h3>Start on the Mac</h3><p>Open AudioBridge and press <strong>Start</strong> in the menu bar. macOS asks once for the permission the capture method needs.</p></li>
+      <li><h3>Start on the Mac</h3><p>Open Tethertone and press <strong>Start</strong> in the menu bar. macOS asks once for the permission the capture method needs.</p></li>
       <li><h3>Scan the QR code</h3><p>On the phone, tap <strong>Scan pairing QR</strong> and point it at the code on the Mac's Pairing tab. Plug in the USB cable too if you like.</p></li>
       <li><h3>Play anything</h3><p>Music, video, calls, games: whatever the Mac plays comes out of the phone. Next time, just press Start and the phone reconnects.</p></li>
     </ol>
@@ -244,7 +216,7 @@
     <div class="section-head">
       <p class="eyebrow">Capture methods</p>
       <h2 id="capture-title">Your choice of permission</h2>
-      <p class="lead">macOS offers two ways to hear what the Mac is playing. AudioBridge supports both, and you switch between them from the window.</p>
+      <p class="lead">macOS offers two ways to hear what the Mac is playing. Tethertone supports both, and you switch between them from the window.</p>
     </div>
     <div class="duo">
       <article class="card">
@@ -271,23 +243,23 @@
     <div class="routes">
       <div class="route">
         <div class="route-header"><div class="route-icon">{{icon.usb}}</div><b>USB cable</b></div>
-        <p>The lowest latency, and immune to Wi-Fi congestion. Uses <code>adb reverse</code>, which AudioBridge sets up on its own.</p>
-        <span class="meta">Best · 40–60ms</span>
+        <p>The lowest latency, and immune to Wi-Fi congestion. Uses <code>adb reverse</code>, which Tethertone sets up on its own.</p>
+        <span class="meta">Best</span>
       </div>
       <div class="route">
         <div class="route-header"><div class="route-icon">{{icon.wifi}}</div><b>Same Wi-Fi</b></div>
         <p>No cable, no setup. Works on any home network that lets devices see each other.</p>
-        <span class="meta">Default · 90ms</span>
+        <span class="meta">Default</span>
       </div>
       <div class="route">
         <div class="route-header"><div class="route-icon">{{icon.shield}}</div><b>Mesh VPN</b></div>
         <p>Tailscale or ZeroTier on both devices. The address appears in the QR code on its own and works from anywhere.</p>
-        <span class="meta">Remote · WireGuard</span>
+        <span class="meta">Remote</span>
       </div>
       <div class="route">
         <div class="route-header"><div class="route-icon">{{icon.globe}}</div><b>Tunnel</b></div>
         <p>Add an ngrok or cloudflared hostname by hand. The token gates access, but audio isn't encrypted.</p>
-        <span class="meta">Advanced · WAN</span>
+        <span class="meta">Advanced</span>
       </div>
     </div>
   </div>
@@ -298,7 +270,7 @@
     <div>
       <p class="eyebrow">Open source</p>
       <h2 id="oss-title">Read it, build it, change it</h2>
-      <p class="lead">AudioBridge is MIT licensed and developed in the open. The whole project is small enough to read in an afternoon.</p>
+      <p class="lead">Tethertone is MIT licensed and developed in the open. The whole project is small enough to read in an afternoon.</p>
       <ul class="checks">
         <li>A SwiftUI app for macOS that builds with just the Command Line Tools</li>
         <li>A Kotlin Multiplatform client whose logic runs and is tested on the plain JVM</li>
@@ -310,23 +282,20 @@
         <a class="btn btn-ghost" href="{{root}}open-source/">Project notes and roadmap {{icon.arrow}}</a>
       </div>
     </div>
-    <div class="terminal" role="img" aria-label="Terminal commands that build AudioBridge from source">
-      <div class="terminal-bar" aria-hidden="true">
-        <div class="terminal-dots"><i></i><i></i><i></i></div>
-        <span class="terminal-title">bash — clone &amp; build</span>
+    <figure class="terminal" aria-labelledby="build-title">
+      <div class="terminal-bar">
+        <div class="terminal-dots" aria-hidden="true"><i></i><i></i><i></i></div>
+        <span class="terminal-title" id="build-title">Build from source</span>
       </div>
-<pre aria-hidden="true"><span class="c"># clone</span>
-<span class="p">$</span> git clone https://github.com/AimenSayoud/audiobridge
-<span class="p">$</span> cd audiobridge
-
-<span class="c"># macOS app — no Xcode needed</span>
-<span class="p">$</span> cd macos &amp;&amp; ./build.sh --install
-<span class="ok">[sign] signature verified</span>
+<pre><code><span class="c"># macOS app — no Xcode needed</span>
+git clone https://github.com/AimenSayoud/tethertone.git
+cd tethertone/macos
+./build.sh --install
 
 <span class="c"># Android app</span>
-<span class="p">$</span> cd ../android &amp;&amp; ./gradlew installDebug
-<span class="ok">BUILD SUCCESSFUL</span></pre>
-    </div>
+cd ../android
+./gradlew :androidApp:installDebug</code></pre>
+    </figure>
   </div>
 </section>
 
@@ -337,11 +306,11 @@
       <h2 id="faq-title">Questions, answered</h2>
     </div>
     <div class="faq">
-      <details><summary>Can I use my Android phone as a speaker for my Mac?</summary><div class="answer"><p>Yes. Install AudioBridge on the Mac and on the phone, press Start on the Mac and scan the QR code with the phone. Everything the Mac plays is then streamed to the phone's speaker or headphones, over a USB cable or Wi-Fi.</p></div></details>
-      <details><summary>Is AudioBridge free?</summary><div class="answer"><p>Yes. AudioBridge is free and open source under the MIT License. There are no ads, no accounts, no subscriptions and no tracking.</p></div></details>
+      <details><summary>Can I use my Android phone as a speaker for my Mac?</summary><div class="answer"><p>Yes. Install Tethertone on the Mac and on the phone, press Start on the Mac and scan the QR code with the phone. Everything the Mac plays is then streamed to the phone's speaker or headphones, over a USB cable or Wi-Fi.</p></div></details>
+      <details><summary>Is Tethertone free?</summary><div class="answer"><p>Yes. Tethertone is free and open source under the MIT License. There are no ads, no accounts, no subscriptions and no tracking.</p></div></details>
       <details><summary>Does it work over USB or only over Wi-Fi?</summary><div class="answer"><p>Both. Over USB it uses <code>adb reverse</code>, which needs USB debugging on the phone and adb on the Mac. Over Wi-Fi both devices must be on the same network. The pairing code lists every route and the phone uses whichever answers first, so the cable wins when it is plugged in.</p></div></details>
-      <details><summary>How much latency does AudioBridge add?</summary><div class="answer"><p>Latency is mostly the phone's jitter buffer, which you set between 20 and 250 ms; the default is 90 ms. Measured on USB with the default setting, the buffer held between 40 and 110 ms with no lost packets. Lower settings reduce latency at the cost of more dropouts on a busy network.</p></div></details>
-      <details><summary>Why does macOS ask for Screen Recording permission?</summary><div class="answer"><p>The default capture method uses ScreenCaptureKit, the only macOS API that provides the whole system audio mix without a virtual driver. It has no audio-only mode, so macOS files it under screen recording. AudioBridge never reads an image. To avoid the permission, install BlackHole and switch the capture method to BlackHole, which needs only the Microphone permission.</p></div></details>
+      <details><summary>How much latency does Tethertone add?</summary><div class="answer"><p>Latency is mostly the phone's jitter buffer, which you set between 20 and 250 ms; the default is 90 ms. Measured on USB with the default setting, the buffer held between 40 and 110 ms with no lost packets. Lower settings reduce latency at the cost of more dropouts on a busy network.</p></div></details>
+      <details><summary>Why does macOS ask for Screen Recording permission?</summary><div class="answer"><p>The default capture method uses ScreenCaptureKit, the only macOS API that provides the whole system audio mix without a virtual driver. It has no audio-only mode, so macOS files it under screen recording. Tethertone never reads an image. To avoid the permission, install BlackHole and switch the capture method to BlackHole, which needs only the Microphone permission.</p></div></details>
       <details><summary>Do I need BlackHole or Soundflower?</summary><div class="answer"><p>No. The default Screen Recording method needs nothing installed. BlackHole is an optional alternative for people who prefer not to grant the Screen Recording permission.</p></div></details>
       <details><summary>Is the audio encrypted?</summary><div class="answer"><p>No. A random token in the QR code stops other people on your network from connecting, but the audio itself travels unencrypted. On a network you do not trust, use the USB cable or a VPN such as Tailscale.</p></div></details>
       <details><summary>Does it work with iPhone, Windows or Linux?</summary><div class="answer"><p>Not yet. The sender is a macOS app and the receiver is an Android app. The wire protocol is documented, so other senders and receivers can be built on it.</p></div></details>
@@ -356,7 +325,7 @@
     <h2 id="cta-title">Turn your phone into your Mac's speaker</h2>
     <p>Free for everyone, forever. Download both apps and you'll be listening in about a minute.</p>
     <div class="hero-cta">
-      <a class="btn btn-primary btn-lg" href="{{root}}download/">Download AudioBridge</a>
+      <a class="btn btn-primary btn-lg" href="{{root}}download/">Download Tethertone</a>
       <a class="btn btn-secondary btn-lg" href="{{repo}}" rel="noopener">{{icon.github}}View source</a>
     </div>
   </div>

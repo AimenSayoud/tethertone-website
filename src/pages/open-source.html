@@ -1,8 +1,8 @@
 <!--meta
 {
   "slug": "open-source",
-  "title": "AudioBridge Open Source: Code, Roadmap and Contributing",
-  "description": "AudioBridge is MIT-licensed open source: a SwiftUI macOS app and a Kotlin Multiplatform Android app. Repository map, roadmap, known gaps and how to contribute.",
+  "title": "Tethertone Open Source: Code, Roadmap and Contributing",
+  "description": "Tethertone is MIT-licensed open source: a SwiftUI macOS app and a Kotlin Multiplatform Android app. Repository map, roadmap, known gaps and how to contribute.",
   "jsonLd": [
     {
       "@context": "https://schema.org",
@@ -15,7 +15,7 @@
     {
       "@context": "https://schema.org",
       "@type": "SoftwareSourceCode",
-      "name": "AudioBridge",
+      "name": "Tethertone",
       "description": "Stream a Mac's audio to an Android phone over USB or Wi-Fi.",
       "codeRepository": "{{repo}}",
       "programmingLanguage": ["Swift", "Kotlin", "Python"],
@@ -30,9 +30,9 @@
   <div class="container">
     <ol class="breadcrumb"><li><a href="{{root}}">Home</a></li><li aria-current="page">Open source</li></ol>
     <h1>Open source</h1>
-    <p class="lead">AudioBridge is free software under the MIT License, built in the open by its contributors. These are the project notes: what's there, what's next, and how to help.</p>
+    <p class="lead">Tethertone, formerly AudioBridge, is free software under the MIT License, built in the open by its contributors. These are the project notes: what's there, what's next, and how to help.</p>
     <div class="hero-cta">
-      <a class="btn btn-primary" href="{{repo}}" rel="noopener">{{icon.github}}AimenSayoud/audiobridge</a>
+      <a class="btn btn-primary" href="{{repo}}" rel="noopener">{{icon.github}}AimenSayoud/tethertone</a>
       <a class="btn btn-secondary" href="{{repo}}/blob/main/CONTRIBUTING.md" rel="noopener">Contributing guide</a>
     </div>
   </div>
@@ -66,7 +66,7 @@
     <p>The Mac app uses only Apple frameworks: SwiftUI, ScreenCaptureKit, AVFoundation, Network and Core Image. The Android app uses Jetpack Compose, CameraX, ZXing and kotlinx. Neither app includes analytics or crash reporting, and neither talks to any server but your own devices.</p>
 
     <h2 id="license">License</h2>
-    <p>AudioBridge is released under the <a href="{{repo}}/blob/main/LICENSE" rel="noopener">MIT License</a>, © AudioBridge contributors. You may use, copy, modify, merge, publish, distribute, sublicense and sell copies, provided the copyright notice and license text are included. The software comes with no warranty.</p>
+    <p>Tethertone is released under the <a href="{{repo}}/blob/main/LICENSE" rel="noopener">MIT License</a>, © Tethertone contributors. You may use, copy, modify, merge, publish, distribute, sublicense and sell copies, provided the copyright notice and license text are included. The software comes with no warranty.</p>
 
     <h2 id="map">Repository map</h2>
 <pre><code>macos/          SwiftUI app: capture, TCP server, QR pairing, adb setup
@@ -85,7 +85,7 @@ scripts/        release.sh — builds every release artifact</code></pre>
       <li><strong>Found a bug?</strong> Use the <a href="{{repo}}/issues/new/choose" rel="noopener">bug report form</a>. Include your macOS and Android versions, the phone model, the capture method and route, and what the Mac's Activity card shows.</li>
       <li><strong>Want to fix something?</strong> Fork the repository, make one logical change, and run the same checks CI runs:</li>
     </ol>
-<pre><code>cd macos &amp;&amp; ./build.sh &amp;&amp; ./AudioBridge.app/Contents/MacOS/AudioBridge --selftest
+<pre><code>cd macos &amp;&amp; ./build.sh &amp;&amp; ./Tethertone.app/Contents/MacOS/Tethertone --selftest
 cd ../android &amp;&amp; ./gradlew :shared:jvmTest :androidApp:assembleDebug</code></pre>
     <ol start="3">
       <li><strong>Open a pull request</strong> describing what changed and how you tested it, on which Mac and which phone.</li>
@@ -104,6 +104,7 @@ cd ../android &amp;&amp; ./gradlew :shared:jvmTest :androidApp:assembleDebug</co
     <h2 id="roadmap">Roadmap</h2>
     <p>Candidates, not promises. Discussion and pull requests welcome.</p>
     <ul class="roadmap">
+      <li><span class="state done">Shipped</span><div><b>0.2.0: renamed to Tethertone</b><span class="d">Formerly AudioBridge. New app identifiers on both platforms, so it installs as a new app.</span></div></li>
       <li><span class="state done">Shipped</span><div><b>0.1.0: first public release</b><span class="d">Universal macOS app, Android app, USB and Wi-Fi, drift correction, QR pairing.</span></div></li>
       <li><span class="state next">Next</span><div><b>Core Audio process taps</b><span class="d">macOS 14.2+ can capture system audio with only the “System Audio Recording” permission, with no Screen Recording indicator and no BlackHole.</span></div></li>
       <li><span class="state next">Next</span><div><b>Optional Opus compression</b><span class="d">About 128 kbit/s instead of 1.5 Mbit/s, for VPN and mobile-data use.</span></div></li>
@@ -127,6 +128,6 @@ cd ../android &amp;&amp; ./gradlew :shared:jvmTest :androidApp:assembleDebug</co
       <li><a href="https://github.com/zxing/zxing" rel="noopener">ZXing</a> for QR decoding, and <a href="https://developer.android.com/jetpack/androidx/releases/camera" rel="noopener">CameraX</a> for the camera.</li>
       <li><a href="https://developer.android.com/compose" rel="noopener">Jetpack Compose</a>, <a href="https://kotlinlang.org/docs/multiplatform.html" rel="noopener">Kotlin Multiplatform</a> and kotlinx.coroutines / serialization.</li>
     </ul>
-    <p>The source of this website is also open: <a href="{{siteRepo}}" rel="noopener">AimenSayoud/audiobridge-website</a>.</p>
+    <p>The source of this website is also open: <a href="{{siteRepo}}" rel="noopener">AimenSayoud/tethertone-website</a>.</p>
   </article>
 </div>

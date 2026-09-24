@@ -1,15 +1,15 @@
-# Development plan — audiobridge-website
+# Development plan — tethertone-website
 
 The marketing and documentation site for
-[AudioBridge](https://github.com/AimenSayoud/audiobridge). It is a static site
+[Tethertone](https://github.com/AimenSayoud/tethertone). It is a static site
 with no framework, no tracking and no third-party requests, built by a small
 Node script and deployed to GitHub Pages.
 
-**Live:** https://aimensayoud.github.io/audiobridge-website/
+**Live:** https://aimensayoud.github.io/tethertone-website/
 
 ## Goals
 
-1. **Explain it in five seconds.** A visitor understands what AudioBridge does,
+1. **Explain it in five seconds.** A visitor understands what Tethertone does,
    and that it is free, open source and native, without scrolling.
 2. **Get people to a working setup.** Downloads, install steps and the first
    pairing are one click from every page.
@@ -86,7 +86,31 @@ They break for reasons outside the site's control.
 - [x] Public repository and GitHub Pages deployment
 - [x] Website linked from the app repository's README and “About” homepage field
 
-### Phase 7 — After launch (owner actions and ideas)
+### Phase 7 — Rename and design review ✅
+Tethertone was published as AudioBridge 0.1.0; 0.2.0 renamed it everywhere.
+The site took the new name, redirects searchers with `alternateName`, and tells
+0.1.0 users what to do. A batch of outside design changes was reviewed:
+
+| Change | Decision |
+|---|---|
+| Light/dark theme switch | **Kept.** Choice stored per visitor, applied before first paint |
+| Collapsible table of contents | **Kept, improved.** Collapsed by default on phones, a fixed sidebar on desktop |
+| Table wrappers, callout icons, FAQ cards, route icons, copy icons | **Kept** |
+| QR code on the download page | **Kept, improved.** Opens the download page (survives new releases); desktop only |
+| Terminal copy button | **Kept, fixed.** It sat inside an `aria-hidden` region; the terminal is now real, indexable text |
+| Back-to-top link | **Kept.** The script that overrode it was removed |
+| Reading progress bar | **Kept for articles only.** Now animated with a transform instead of width |
+| Invented UI in the hero (LIVE badge, “Stop Broadcast”, “USB 3.0”, L/R dB meters) | **Removed.** Mockups must show the real apps |
+| Footer “status” dot | **Removed.** It implied a live service; now a version and changelog link |
+| Route labels “WireGuard”, “40–60ms” | **Removed.** Inaccurate (ZeroTier isn't WireGuard; latency depends on the buffer) |
+| Hover lift on non-clickable cards | **Removed.** It suggested links that weren't there |
+
+It also fixed three regressions: home performance fell from 100 to 85
+(layout-triggering animations, since moved to transforms); document pages
+overflowed on phones (grid column `1fr` → `minmax(0, 1fr)`); and the hero
+drawing took 900 px of a phone screen (the Mac drawing is hidden below 560 px).
+
+### Phase 8 — After launch (owner actions and ideas)
 - [ ] Verify the site in [Google Search Console](https://search.google.com/search-console) and submit `sitemap.xml`
 - [ ] Same for [Bing Webmaster Tools](https://www.bing.com/webmasters)
 - [ ] Optional custom domain: set `SITE_URL` in `site.config.mjs`, add a `CNAME` file, configure DNS

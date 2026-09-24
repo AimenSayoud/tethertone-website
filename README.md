@@ -1,10 +1,10 @@
-# audiobridge-website
+# tethertone-website
 
-The website for [AudioBridge](https://github.com/AimenSayoud/audiobridge), the
+The website for [Tethertone](https://github.com/AimenSayoud/tethertone), the
 free, open-source app that streams your Mac's audio to your Android phone over
 USB or Wi-Fi.
 
-**Live:** https://aimensayoud.github.io/audiobridge-website/
+**Live:** https://aimensayoud.github.io/tethertone-website/
 
 A static site with no framework, no web fonts, no tracking and no third-party
 requests. Every page scores 100 in Lighthouse for performance, accessibility,
@@ -71,4 +71,4 @@ pipeline and roadmap.
 
 ## License
 
-[MIT](LICENSE) © AudioBridge contributors
+[MIT](LICENSE) © Tethertone contributors

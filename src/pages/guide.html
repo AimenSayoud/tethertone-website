@@ -2,7 +2,7 @@
 {
   "slug": "guide",
   "title": "Setup Guide: Stream Mac Audio to an Android Phone",
-  "description": "Step-by-step guide to streaming your Mac's audio to an Android phone with AudioBridge: pairing, USB, Wi-Fi, BlackHole setup, remote access and troubleshooting.",
+  "description": "Step-by-step guide to streaming your Mac's audio to an Android phone with Tethertone: pairing, USB, Wi-Fi, BlackHole setup, remote access and troubleshooting.",
   "ogType": "article",
   "jsonLd": [
     {
@@ -17,12 +17,12 @@
       "@context": "https://schema.org",
       "@type": "HowTo",
       "name": "How to stream your Mac's audio to an Android phone",
-      "description": "Use AudioBridge to play everything your Mac plays on an Android phone, over USB or Wi-Fi.",
+      "description": "Use Tethertone to play everything your Mac plays on an Android phone, over USB or Wi-Fi.",
       "totalTime": "PT2M",
       "tool": [{ "@type": "HowToTool", "name": "A Mac running macOS 14 or later" }, { "@type": "HowToTool", "name": "An Android phone running Android 8.0 or later" }],
       "step": [
-        { "@type": "HowToStep", "position": 1, "name": "Install both apps", "text": "Install AudioBridge on the Mac from the .dmg and on the phone from the .apk.", "url": "{{siteUrl}}/guide/#install" },
-        { "@type": "HowToStep", "position": 2, "name": "Start the Mac app", "text": "Open AudioBridge on the Mac, press Start and allow the permission macOS asks for.", "url": "{{siteUrl}}/guide/#pair" },
+        { "@type": "HowToStep", "position": 1, "name": "Install both apps", "text": "Install Tethertone on the Mac from the .dmg and on the phone from the .apk.", "url": "{{siteUrl}}/guide/#install" },
+        { "@type": "HowToStep", "position": 2, "name": "Start the Mac app", "text": "Open Tethertone on the Mac, press Start and allow the permission macOS asks for.", "url": "{{siteUrl}}/guide/#pair" },
         { "@type": "HowToStep", "position": 3, "name": "Scan the pairing QR code", "text": "On the phone, tap Scan pairing QR and point the camera at the code on the Mac's Pairing tab.", "url": "{{siteUrl}}/guide/#pair" },
         { "@type": "HowToStep", "position": 4, "name": "Play audio", "text": "Play anything on the Mac. It comes out of the phone.", "url": "{{siteUrl}}/guide/#pair" }
       ]
@@ -61,9 +61,9 @@
 
     <h2 id="pair">2. Pair and play</h2>
     <ol>
-      <li><strong>On the Mac:</strong> open AudioBridge and press <strong>Start</strong>, either in the menu bar or in the window. Allow the permission macOS asks for.</li>
-      <li><strong>On the phone:</strong> open AudioBridge and tap <strong>Scan pairing QR</strong>.</li>
-      <li><strong>On the Mac:</strong> click <strong>Open AudioBridge…</strong> in the menu bar and go to the <strong>Pairing</strong> tab. Point the phone at the QR code. <em>Show large QR</em> opens a bigger copy.</li>
+      <li><strong>On the Mac:</strong> open Tethertone and press <strong>Start</strong>, either in the menu bar or in the window. Allow the permission macOS asks for.</li>
+      <li><strong>On the phone:</strong> open Tethertone and tap <strong>Scan pairing QR</strong>.</li>
+      <li><strong>On the Mac:</strong> click <strong>Open Tethertone…</strong> in the menu bar and go to the <strong>Pairing</strong> tab. Point the phone at the QR code. <em>Show large QR</em> opens a bigger copy.</li>
       <li>Play anything on the Mac. The phone shows <em>Streaming over Wi-Fi</em> or <em>over USB</em>.</li>
     </ol>
     <p>That's the whole setup. The phone remembers the Mac, so next time you only press Start. Without a camera, tap <strong>Enter address manually</strong> on the phone, or open the pairing link (<em>Copy pairing link</em> on the Mac) on the phone.</p>
@@ -91,7 +91,7 @@
 <pre><code>brew install blackhole-2ch</code></pre>
     <ol start="2">
       <li>In <strong>System Settings › Sound › Output</strong>, choose <strong>BlackHole 2ch</strong>.</li>
-      <li>In AudioBridge, set <strong>Capture method</strong> to <strong>BlackHole</strong> and pick <em>BlackHole 2ch</em> as the input device.</li>
+      <li>In Tethertone, set <strong>Capture method</strong> to <strong>BlackHole</strong> and pick <em>BlackHole 2ch</em> as the input device.</li>
       <li>To keep hearing audio on the Mac, turn on <strong>Audio › Hear it on this Mac too</strong> and pick your speakers. That saves building a Multi-Output Device in Audio MIDI Setup.</li>
     </ol>
     <div class="callout">
@@ -102,7 +102,7 @@
     <h2 id="usb">USB connection</h2>
     <p>USB gives the lowest latency and is immune to Wi-Fi congestion. You need <strong>USB debugging</strong> enabled on the phone and <code>adb</code> on the Mac:</p>
 <pre><code>brew install android-platform-tools</code></pre>
-    <p>Plug in the phone and accept <em>Allow USB debugging?</em>. With <strong>Network › Offer the USB path</strong> on (the default), AudioBridge runs <code>adb reverse</code> by itself whenever a phone appears. It also puts the cable first in the QR code. The phone keeps Wi-Fi as a fallback, so you can unplug at any time.</p>
+    <p>Plug in the phone and accept <em>Allow USB debugging?</em>. With <strong>Network › Offer the USB path</strong> on (the default), Tethertone runs <code>adb reverse</code> by itself whenever a phone appears. It also puts the cable first in the QR code. The phone keeps Wi-Fi as a fallback, so you can unplug at any time.</p>
 
     <h2 id="latency">Tuning latency</h2>
     <p>Most of the delay is the phone's <strong>jitter buffer</strong>: audio held back to absorb network hiccups. Set it with the slider on the phone's home screen, while disconnected.</p>
@@ -131,21 +131,21 @@
 
     <h2 id="troubleshooting">Troubleshooting</h2>
     <h3>Permission error, but the toggle is on</h3>
-    <p>macOS ties permissions to the app's signature, and an update can leave a stale grant that shows as allowed. In <strong>System Settings › Privacy &amp; Security</strong>, switch AudioBridge off and on again. If that fails, reset it and press Start again:</p>
-<pre><code>tccutil reset ScreenCapture dev.audiobridge.mac
-tccutil reset Microphone dev.audiobridge.mac</code></pre>
+    <p>macOS ties permissions to the app's signature, and an update can leave a stale grant that shows as allowed. In <strong>System Settings › Privacy &amp; Security</strong>, switch Tethertone off and on again. If that fails, reset it and press Start again:</p>
+<pre><code>tccutil reset ScreenCapture dev.tethertone.mac
+tccutil reset Microphone dev.tethertone.mac</code></pre>
 
     <h3>The phone scans but never connects</h3>
-    <p>Look at the Mac's <strong>Overview › Activity</strong> card. If nothing arrives there, the phone's packets aren't reaching the Mac. The devices are on different networks, or the Wi-Fi blocks device-to-device traffic, which is common on guest and office networks. Use the USB cable, and check the macOS firewall allows AudioBridge.</p>
+    <p>Look at the Mac's <strong>Overview › Activity</strong> card. If nothing arrives there, the phone's packets aren't reaching the Mac. The devices are on different networks, or the Wi-Fi blocks device-to-device traffic, which is common on guest and office networks. Use the USB cable, and check the macOS firewall allows Tethertone.</p>
 
     <h3>Level meter shows silence</h3>
-    <p>With BlackHole, the Mac's output must go <em>into</em> BlackHole and AudioBridge's input must be BlackHole. With Screen Recording, make sure something is actually playing.</p>
+    <p>With BlackHole, the Mac's output must go <em>into</em> BlackHole and Tethertone's input must be BlackHole. With Screen Recording, make sure something is actually playing.</p>
 
     <h3>Audio stutters</h3>
     <p>Prefer USB, raise the jitter buffer, and choose a larger packet size on the Mac. If the phone's <em>Clock drift</em> card says rate control is unavailable, turn off <strong>Prefer low-latency audio path</strong> in the phone's Settings.</p>
 
     <h3>Playback stops with the screen off</h3>
-    <p>Some phone makers stop background apps aggressively. Exempt AudioBridge from battery optimisation. <a href="https://dontkillmyapp.com" rel="noopener">dontkillmyapp.com</a> has instructions for each manufacturer.</p>
+    <p>Some phone makers stop background apps aggressively. Exempt Tethertone from battery optimisation. <a href="https://dontkillmyapp.com" rel="noopener">dontkillmyapp.com</a> has instructions for each manufacturer.</p>
 
     <p>Still stuck? <a href="{{repo}}/issues/new/choose" rel="noopener">Open an issue</a> with your macOS and Android versions, the phone model and what the Activity card shows.</p>
   </article>

@@ -50,9 +50,10 @@ export function renderPage({ meta, body, root, url, config, nav }) {
 <meta name="description" content="${esc(meta.description)}">
 <link rel="canonical" href="${url}">
 ${meta.noindex ? '<meta name="robots" content="noindex">' : '<meta name="robots" content="index, follow, max-image-preview:large">'}
-<meta name="theme-color" content="${config.themeColor}">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="${config.themeColor}">
 <meta name="color-scheme" content="light dark">
-<meta name="author" content="AudioBridge contributors">
+<meta name="author" content="Tethertone contributors">
 <meta property="og:type" content="${meta.ogType || 'website'}">
 <meta property="og:site_name" content="${config.name}">
 <meta property="og:locale" content="${config.locale}">
@@ -62,7 +63,7 @@ ${meta.noindex ? '<meta name="robots" content="noindex">' : '<meta name="robots"
 <meta property="og:image" content="${image}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="AudioBridge — stream your Mac's audio to your Android phone over USB or Wi-Fi">
+<meta property="og:image:alt" content="Tethertone — stream your Mac's audio to your Android phone over USB or Wi-Fi">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="${esc(meta.ogTitle || title)}">
 <meta name="twitter:description" content="${esc(meta.description)}">
@@ -71,12 +72,12 @@ ${meta.noindex ? '<meta name="robots" content="noindex">' : '<meta name="robots"
 <link rel="icon" href="${root}favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="${root}apple-touch-icon.png">
 <link rel="manifest" href="${root}site.webmanifest">
-<link rel="stylesheet" href="${root}assets/css/site.css">
+${body.includes('data-asset') ? '<link rel="preconnect" href="https://api.github.com" crossorigin>\n' : ''}<link rel="stylesheet" href="${root}assets/css/site.css">
 <script>
 (() => {
   document.documentElement.classList.replace('no-js','js');
   try {
-    const saved = localStorage.getItem('ab-theme');
+    const saved = localStorage.getItem('tt-theme');
     if (saved === 'dark' || saved === 'light') {
       document.documentElement.setAttribute('data-theme', saved);
     }
@@ -86,19 +87,18 @@ ${meta.noindex ? '<meta name="robots" content="noindex">' : '<meta name="robots"
 <script src="${root}assets/js/site.js" defer></script>
 ${jsonLd(meta.jsonLd)}
 </head>
-<body>
+<body id="top">
 <a class="skip-link" href="#main">Skip to content</a>
-<div class="reading-progress" id="reading-progress" aria-hidden="true"></div>
-<header class="site-header">
+${meta.ogType === 'article' ? '<div class="reading-progress" aria-hidden="true"></div>\n' : ''}<header class="site-header">
   <nav class="nav container" aria-label="Main">
-    <a class="brand" href="${root || './'}" aria-label="AudioBridge home">${icons.logo}<span>AudioBridge</span></a>
+    <a class="brand" href="${root || './'}" aria-label="Tethertone home">${icons.logo}<span>Tethertone</span></a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu">
       <span class="visually-hidden">Menu</span><span class="nav-toggle-bars" aria-hidden="true"></span>
     </button>
     <div class="nav-menu" id="nav-menu">
       <ul class="nav-links">${navLinks}</ul>
       <div class="nav-actions">
-        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle theme" title="Toggle light or dark theme">
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch between light and dark theme" title="Switch between light and dark theme">
           <span class="theme-toggle-sun" aria-hidden="true">${icons.sun}</span>
           <span class="theme-toggle-moon" aria-hidden="true">${icons.moon}</span>
         </button>
@@ -114,12 +114,9 @@ ${body}
 <footer class="site-footer">
   <div class="container footer-grid">
     <div class="footer-brand">
-      <a class="brand" href="${root || './'}">${icons.logo}<span>AudioBridge</span></a>
+      <a class="brand" href="${root || './'}">${icons.logo}<span>Tethertone</span></a>
       <p>Free, open-source audio streaming from macOS to Android. Native on both sides. No account, no cloud, no tracking.</p>
-      <div class="footer-status">
-        <span class="status-dot-pulse" aria-hidden="true"></span>
-        <span>AudioBridge v${config.version} · Protocol v1</span>
-      </div>
+      <p class="footer-version">Version <a href="${config.repo}/releases/latest" rel="noopener">${config.version}</a> · <a href="${config.repo}/blob/main/CHANGELOG.md" rel="noopener">What's new</a></p>
     </div>
     <nav aria-label="Product">
       <h2>Product</h2>
@@ -150,9 +147,9 @@ ${body}
     </nav>
   </div>
   <div class="container footer-legal">
-    <p>© 2026 AudioBridge contributors · <a href="${config.repo}/blob/main/LICENSE" rel="noopener">MIT License</a></p>
+    <p>© 2026 Tethertone contributors · <a href="${config.repo}/blob/main/LICENSE" rel="noopener">MIT License</a></p>
     <div class="footer-actions">
-      <a class="back-to-top" href="#main" id="back-to-top">Back to top ↑</a>
+      <a class="back-to-top" href="#top">Back to top ↑</a>
       <p class="trademark">Not affiliated with Apple or Google. macOS is a trademark of Apple Inc. Android is a trademark of Google LLC.</p>
     </div>
   </div>

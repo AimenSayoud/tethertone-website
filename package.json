@@ -1,8 +1,8 @@
 {
-  "name": "audiobridge-website",
+  "name": "tethertone-website",
   "version": "1.0.0",
   "private": true,
-  "description": "Website for AudioBridge \u2014 stream your Mac's audio to your Android phone.",
+  "description": "Website for Tethertone \u2014 stream your Mac's audio to your Android phone.",
   "license": "MIT",
   "type": "module",
   "engines": {

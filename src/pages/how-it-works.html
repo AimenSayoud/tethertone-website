@@ -1,8 +1,8 @@
 <!--meta
 {
   "slug": "how-it-works",
-  "title": "How AudioBridge Works: Low-Latency Mac-to-Android Audio",
-  "description": "Inside AudioBridge: ScreenCaptureKit and AVAudioEngine capture, a raw TCP protocol, route racing, a jitter buffer and glitch-free clock-drift correction.",
+  "title": "How Tethertone Works: Low-Latency Mac-to-Android Audio",
+  "description": "Inside Tethertone: ScreenCaptureKit and AVAudioEngine capture, a raw TCP protocol, route racing, a jitter buffer and glitch-free clock-drift correction.",
   "ogType": "article",
   "jsonLd": [
     {
@@ -16,13 +16,13 @@
     {
       "@context": "https://schema.org",
       "@type": "TechArticle",
-      "headline": "How AudioBridge streams Mac audio to Android with low latency",
-      "description": "Architecture of AudioBridge: capture, wire protocol, transport routes, jitter buffer and clock-drift correction.",
+      "headline": "How Tethertone streams Mac audio to Android with low latency",
+      "description": "Architecture of Tethertone: capture, wire protocol, transport routes, jitter buffer and clock-drift correction.",
       "proficiencyLevel": "Expert",
       "datePublished": "{{releaseDate}}",
       "dateModified": "{{releaseDate}}",
       "image": "{{siteUrl}}/assets/img/og-image.png",
-      "author": { "@type": "Organization", "name": "AudioBridge contributors", "url": "{{repo}}" },
+      "author": { "@type": "Organization", "name": "Tethertone contributors", "url": "{{repo}}" },
       "mainEntityOfPage": "{{siteUrl}}/how-it-works/"
     }
   ]
@@ -68,7 +68,7 @@
     <h2 id="capture">Capture on the Mac</h2>
     <p>Both capture methods implement one Swift protocol, <code>AudioSource</code>. Both deliver <strong>fixed 480-frame blocks</strong> (10 ms at 48 kHz), whatever buffer size Core Audio uses internally. A steady cadence is much easier on a jitter buffer than whatever the hardware felt like that moment.</p>
     <h3>Screen Recording: ScreenCaptureKit</h3>
-    <p>An <code>SCStream</code> with <code>capturesAudio</code> set delivers the full system mix, with no virtual driver. ScreenCaptureKit can't switch video off, so AudioBridge asks for a 2×2 pixel frame twice a second and throws it away. <code>excludesCurrentProcessAudio</code> keeps AudioBridge's own sound out of the stream, which prevents feedback.</p>
+    <p>An <code>SCStream</code> with <code>capturesAudio</code> set delivers the full system mix, with no virtual driver. ScreenCaptureKit can't switch video off, so Tethertone asks for a 2×2 pixel frame twice a second and throws it away. <code>excludesCurrentProcessAudio</code> keeps Tethertone's own sound out of the stream, which prevents feedback.</p>
     <h3>BlackHole: AVAudioEngine</h3>
     <p>An <code>AVAudioEngine</code> whose input is pinned to a chosen Core Audio device, normally BlackHole. An optional monitor plays a copy to a real output device, so the Mac doesn't go silent when its output is routed into BlackHole.</p>
 
@@ -94,7 +94,7 @@
     <p>Each connected phone has its own bounded send queue on the Mac. If a phone falls behind, its <strong>oldest</strong> packets are dropped. A slow phone never stalls capture or the other listeners. The full specification is in <a href="{{repo}}/blob/main/docs/PROTOCOL.md" rel="noopener">PROTOCOL.md</a>.</p>
 
     <h2 id="routes">Routes and racing</h2>
-    <p>The pairing QR code is an <code>audiobridge://</code> link listing every address the Mac can be reached at, best first:</p>
+    <p>The pairing QR code is an <code>tethertone://</code> link listing every address the Mac can be reached at, best first:</p>
     <ol>
       <li><code>127.0.0.1</code>, when a phone is plugged in and <code>adb reverse</code> succeeded;</li>
       <li>the Mac's Wi-Fi and Ethernet addresses;</li>
@@ -109,11 +109,11 @@
 
     <h2 id="drift">Clock drift, the hard problem</h2>
     <p>The Mac's audio clock and the phone's never agree exactly; they differ by tens of parts per million. That sounds tiny, but a buffer corrected only when it runs empty drifts steadily toward starving or overflowing. Over an hour, that's seconds of extra delay.</p>
-    <p>AudioBridge holds the buffer at its target by playing <strong>a fraction of a percent</strong> faster or slower than nominal. At ±0.2 % the pitch changes by about three cents, far below what anyone can hear. The audio never jumps. The phone's <em>Clock drift</em> card shows it live, for example “playing 204 ppm fast to drain the buffer”.</p>
+    <p>Tethertone holds the buffer at its target by playing <strong>a fraction of a percent</strong> faster or slower than nominal. At ±0.2 % the pitch changes by about three cents, far below what anyone can hear. The audio never jumps. The phone's <em>Clock drift</em> card shows it live, for example “playing 204 ppm fast to drain the buffer”.</p>
     <p>Two findings from real phones shaped the Android audio sink:</p>
     <ul>
       <li><code>AudioTrack.setPlaybackParams</code>, the modern API, is rejected by tracks created in low-latency mode. The older <code>setPlaybackRate</code> works.</li>
-      <li>On some devices a low-latency track refuses <em>both</em>. Smooth correction matters more than the few milliseconds low-latency mode saves, so AudioBridge checks for rate control and, if it's refused, rebuilds the track without low-latency mode.</li>
+      <li>On some devices a low-latency track refuses <em>both</em>. Smooth correction matters more than the few milliseconds low-latency mode saves, so Tethertone checks for rate control and, if it's refused, rebuilds the track without low-latency mode.</li>
     </ul>
     <p>If no rate control exists at all, the buffer is kept in range by occasionally discarding a little audio instead: a click every few minutes rather than latency that grows without limit. The app says which mode is active.</p>
 
@@ -127,7 +127,7 @@
       <table>
         <thead><tr><th scope="col">Implementation</th><th scope="col">Language</th><th scope="col">Checked by</th></tr></thead>
         <tbody>
-          <tr><td>macOS server</td><td>Swift</td><td><code>AudioBridge --selftest</code>: fixed byte vectors</td></tr>
+          <tr><td>macOS server</td><td>Swift</td><td><code>Tethertone --selftest</code>: fixed byte vectors</td></tr>
           <tr><td>Android/JVM client</td><td>Kotlin</td><td><code>gradlew :shared:jvmTest</code>: the <em>same</em> vectors</td></tr>
           <tr><td><code>tools/probe.py</code></td><td>Python</td><td>run against a live server</td></tr>
         </tbody>
