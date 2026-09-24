@@ -40,17 +40,19 @@
 
 <div class="container doc">
   <nav class="toc" aria-label="On this page">
-    <h2>On this page</h2>
-    <ol>
-      <li><a href="#install">1. Install</a></li>
-      <li><a href="#pair">2. Pair and play</a></li>
-      <li><a href="#capture">Capture methods</a></li>
-      <li><a href="#blackhole">Setting up BlackHole</a></li>
-      <li><a href="#usb">USB connection</a></li>
-      <li><a href="#latency">Tuning latency</a></li>
-      <li><a href="#remote">Away from home</a></li>
-      <li><a href="#troubleshooting">Troubleshooting</a></li>
-    </ol>
+    <details class="toc-collapsible" open>
+      <summary>On this page</summary>
+      <ol>
+        <li><a href="#install">1. Install</a></li>
+        <li><a href="#pair">2. Pair and play</a></li>
+        <li><a href="#capture">Capture methods</a></li>
+        <li><a href="#blackhole">Setting up BlackHole</a></li>
+        <li><a href="#usb">USB connection</a></li>
+        <li><a href="#latency">Tuning latency</a></li>
+        <li><a href="#remote">Away from home</a></li>
+        <li><a href="#troubleshooting">Troubleshooting</a></li>
+      </ol>
+    </details>
   </nav>
 
   <article class="prose">
@@ -68,15 +70,17 @@
 
     <h2 id="capture">Capture methods</h2>
     <p>Choose in the Mac window under <strong>Overview › Capture method</strong>.</p>
-    <table>
-      <thead><tr><th scope="col"></th><th scope="col">Screen Recording</th><th scope="col">BlackHole</th></tr></thead>
-      <tbody>
-        <tr><th scope="row">Install</th><td>Nothing</td><td>BlackHole 2ch</td></tr>
-        <tr><th scope="row">Permission</th><td>Screen &amp; System Audio Recording</td><td>Microphone</td></tr>
-        <tr><th scope="row">Menu bar indicator</th><td>Screen-recording indicator</td><td>Microphone indicator</td></tr>
-        <tr><th scope="row">Mac speakers</th><td>Keep working</td><td>Silent unless <em>Hear it on this Mac too</em> is on</td></tr>
-      </tbody>
-    </table>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th scope="col">Feature</th><th scope="col">Screen Recording</th><th scope="col">BlackHole</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Install</th><td>Nothing</td><td>BlackHole 2ch</td></tr>
+          <tr><th scope="row">Permission</th><td>Screen &amp; System Audio Recording</td><td>Microphone</td></tr>
+          <tr><th scope="row">Menu bar indicator</th><td>Screen-recording indicator</td><td>Microphone indicator</td></tr>
+          <tr><th scope="row">Mac speakers</th><td>Keep working</td><td>Silent unless <em>Hear it on this Mac too</em> is on</td></tr>
+        </tbody>
+      </table>
+    </div>
     <p>Screen Recording is the default because it works with nothing installed. It never reads an image. ScreenCaptureKit just has no audio-only mode.</p>
 
     <h2 id="blackhole">Setting up BlackHole</h2>
@@ -90,7 +94,10 @@
       <li>In AudioBridge, set <strong>Capture method</strong> to <strong>BlackHole</strong> and pick <em>BlackHole 2ch</em> as the input device.</li>
       <li>To keep hearing audio on the Mac, turn on <strong>Audio › Hear it on this Mac too</strong> and pick your speakers. That saves building a Multi-Output Device in Audio MIDI Setup.</li>
     </ol>
-    <div class="callout"><p>Keep BlackHole at 48 kHz in <strong>Audio MIDI Setup</strong>. If you change its rate while streaming, press Stop and Start so the phone is told the new rate.</p></div>
+    <div class="callout">
+      <div class="callout-icon">{{icon.info}}</div>
+      <p>Keep BlackHole at 48 kHz in <strong>Audio MIDI Setup</strong>. If you change its rate while streaming, press Stop and Start so the phone is told the new rate.</p>
+    </div>
 
     <h2 id="usb">USB connection</h2>
     <p>USB gives the lowest latency and is immune to Wi-Fi congestion. You need <strong>USB debugging</strong> enabled on the phone and <code>adb</code> on the Mac:</p>
@@ -108,14 +115,19 @@
 
     <h2 id="remote">Away from home</h2>
     <p>A phone on mobile data can't reach a Mac on a home network directly: both sit behind NAT, and neither has an address the other can dial. What works:</p>
-    <table>
-      <thead><tr><th scope="col">Route</th><th scope="col">Setup</th><th scope="col">Notes</th></tr></thead>
-      <tbody>
-        <tr><td>Mesh VPN (Tailscale, ZeroTier)</td><td>Install on both devices</td><td>Encrypted, and works anywhere. Its address appears in the QR code on its own.</td></tr>
-        <tr><td>Tunnel (ngrok, cloudflared)</td><td>Enter the hostname under <em>Network › Reaching this Mac from anywhere</em></td><td>Exposes the port publicly. The token gates it, but audio is unencrypted.</td></tr>
-      </tbody>
-    </table>
-    <div class="callout warn"><p>The stream is uncompressed: about 1.5 Mbit/s, or roughly <strong>690 MB per hour</strong>. Mind your mobile data plan.</p></div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th scope="col">Route</th><th scope="col">Setup</th><th scope="col">Notes</th></tr></thead>
+        <tbody>
+          <tr><td>Mesh VPN (Tailscale, ZeroTier)</td><td>Install on both devices</td><td>Encrypted, and works anywhere. Its address appears in the QR code on its own.</td></tr>
+          <tr><td>Tunnel (ngrok, cloudflared)</td><td>Enter the hostname under <em>Network › Reaching this Mac from anywhere</em></td><td>Exposes the port publicly. The token gates it, but audio is unencrypted.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout warn">
+      <div class="callout-icon">{{icon.warn}}</div>
+      <p>The stream is uncompressed: about 1.5 Mbit/s, or roughly <strong>690 MB per hour</strong>. Mind your mobile data plan.</p>
+    </div>
 
     <h2 id="troubleshooting">Troubleshooting</h2>
     <h3>Permission error, but the toggle is on</h3>

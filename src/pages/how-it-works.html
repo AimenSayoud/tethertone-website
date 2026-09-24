@@ -38,17 +38,19 @@
 
 <div class="container doc">
   <nav class="toc" aria-label="On this page">
-    <h2>On this page</h2>
-    <ol>
-      <li><a href="#overview">Overview</a></li>
-      <li><a href="#capture">Capture on the Mac</a></li>
-      <li><a href="#protocol">The wire protocol</a></li>
-      <li><a href="#routes">Routes and racing</a></li>
-      <li><a href="#buffer">The jitter buffer</a></li>
-      <li><a href="#drift">Clock drift</a></li>
-      <li><a href="#security">Security model</a></li>
-      <li><a href="#testing">Testing</a></li>
-    </ol>
+    <details class="toc-collapsible" open>
+      <summary>On this page</summary>
+      <ol>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#capture">Capture on the Mac</a></li>
+        <li><a href="#protocol">The wire protocol</a></li>
+        <li><a href="#routes">Routes and racing</a></li>
+        <li><a href="#buffer">The jitter buffer</a></li>
+        <li><a href="#drift">Clock drift</a></li>
+        <li><a href="#security">Security model</a></li>
+        <li><a href="#testing">Testing</a></li>
+      </ol>
+    </details>
   </nav>
 
   <article class="prose">
@@ -78,15 +80,17 @@
  +------+------+--------+----------------+
  |          payload (length bytes)        |
  +----------------------------------------+</code></pre>
-    <table>
-      <thead><tr><th scope="col">Type</th><th scope="col">Direction</th><th scope="col">Purpose</th></tr></thead>
-      <tbody>
-        <tr><td><code>AUDIO</code></td><td>Mac → phone</td><td>interleaved PCM; gaps in <code>seq</code> are reported as lost packets</td></tr>
-        <tr><td><code>PING</code> / <code>PONG</code></td><td>both</td><td>round-trip time, measured on the Mac where both timestamps share a clock</td></tr>
-        <tr><td><code>STATS</code></td><td>phone → Mac</td><td>buffer depth, underruns, loss and playback speed, shown in the Mac's window</td></tr>
-        <tr><td><code>BYE</code></td><td>both</td><td>clean disconnect with a reason</td></tr>
-      </tbody>
-    </table>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th scope="col">Type</th><th scope="col">Direction</th><th scope="col">Purpose</th></tr></thead>
+        <tbody>
+          <tr><td><code>AUDIO</code></td><td>Mac → phone</td><td>interleaved PCM; gaps in <code>seq</code> are reported as lost packets</td></tr>
+          <tr><td><code>PING</code> / <code>PONG</code></td><td>both</td><td>round-trip time, measured on the Mac where both timestamps share a clock</td></tr>
+          <tr><td><code>STATS</code></td><td>phone → Mac</td><td>buffer depth, underruns, loss and playback speed, shown in the Mac's window</td></tr>
+          <tr><td><code>BYE</code></td><td>both</td><td>clean disconnect with a reason</td></tr>
+        </tbody>
+      </table>
+    </div>
     <p>Each connected phone has its own bounded send queue on the Mac. If a phone falls behind, its <strong>oldest</strong> packets are dropped. A slow phone never stalls capture or the other listeners. The full specification is in <a href="{{repo}}/blob/main/docs/PROTOCOL.md" rel="noopener">PROTOCOL.md</a>.</p>
 
     <h2 id="routes">Routes and racing</h2>
@@ -119,14 +123,16 @@
 
     <h2 id="testing">Testing</h2>
     <p>The protocol is implemented three times, independently:</p>
-    <table>
-      <thead><tr><th scope="col">Implementation</th><th scope="col">Language</th><th scope="col">Checked by</th></tr></thead>
-      <tbody>
-        <tr><td>macOS server</td><td>Swift</td><td><code>AudioBridge --selftest</code>: fixed byte vectors</td></tr>
-        <tr><td>Android/JVM client</td><td>Kotlin</td><td><code>gradlew :shared:jvmTest</code>: the <em>same</em> vectors</td></tr>
-        <tr><td><code>tools/probe.py</code></td><td>Python</td><td>run against a live server</td></tr>
-      </tbody>
-    </table>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th scope="col">Implementation</th><th scope="col">Language</th><th scope="col">Checked by</th></tr></thead>
+        <tbody>
+          <tr><td>macOS server</td><td>Swift</td><td><code>AudioBridge --selftest</code>: fixed byte vectors</td></tr>
+          <tr><td>Android/JVM client</td><td>Kotlin</td><td><code>gradlew :shared:jvmTest</code>: the <em>same</em> vectors</td></tr>
+          <tr><td><code>tools/probe.py</code></td><td>Python</td><td>run against a live server</td></tr>
+        </tbody>
+      </table>
+    </div>
     <p>The Kotlin client's logic has no Android dependencies, so it also runs on a desktop JVM. When a phone misbehaves, that answers whether the protocol or Android is at fault within seconds. Read more in <a href="{{repo}}/blob/main/docs/ARCHITECTURE.md" rel="noopener">ARCHITECTURE.md</a>.</p>
   </article>
 </div>

@@ -12,6 +12,17 @@ export const icons = {
   apple: `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M16.37 12.64c-.02-2.3 1.88-3.4 1.96-3.46-1.07-1.56-2.73-1.78-3.32-1.8-1.41-.14-2.76.83-3.47.83-.72 0-1.82-.81-2.99-.79-1.54.02-2.96.9-3.75 2.27-1.6 2.78-.41 6.89 1.15 9.14.76 1.1 1.67 2.34 2.86 2.3 1.15-.05 1.58-.74 2.97-.74 1.38 0 1.77.74 2.98.72 1.23-.02 2.01-1.12 2.76-2.23.87-1.28 1.23-2.52 1.25-2.58-.03-.01-2.39-.92-2.4-3.66zM14.1 5.88c.63-.77 1.06-1.83.94-2.88-.91.04-2.02.61-2.67 1.37-.59.68-1.1 1.76-.96 2.8 1.02.08 2.05-.52 2.69-1.29z"/></svg>`,
   android: `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M17.6 9.48l1.84-3.18a.38.38 0 00-.66-.38l-1.87 3.23A11.43 11.43 0 0012 8.17c-1.77 0-3.43.37-4.91.98L5.22 5.92a.38.38 0 00-.66.38L6.4 9.48C3.3 11.25 1.2 14.4 1 18h22c-.2-3.6-2.3-6.75-5.4-8.52zM7 15.25a1.25 1.25 0 110-2.5 1.25 1.25 0 010 2.5zm10 0a1.25 1.25 0 110-2.5 1.25 1.25 0 010 2.5z"/></svg>`,
   arrow: `<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M3 8h10M9 4l4 4-4 4"/></svg>`,
+  sun: `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4" fill="currentColor"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41m14.14-14.14l-1.41 1.41"/></svg>`,
+  moon: `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>`,
+  copy: `<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><rect x="5" y="5" width="8" height="8" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M3.5 11H3a1.5 1.5 0 01-1.5-1.5v-6A1.5 1.5 0 013 2h6a1.5 1.5 0 011.5 1.5v.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>`,
+  check: `<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  qr: `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3zM14 14h3v3h-3zM18 18h3v3h-3zM14 21h3M21 14v3"/></svg>`,
+  info: `<svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="8.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M10 9v5m0-8v1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`,
+  warn: `<svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M10 2.5L1.5 17h17L10 2.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M10 7.5v4.5m0 3v.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`,
+  usb: `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M12 2v14m-4-6l4-4 4 4M8 12a2 2 0 100-4 2 2 0 000 4zm8 2a2 2 0 100-4 2 2 0 000 4zM12 20a2 2 0 100-4 2 2 0 000 4z"/></svg>`,
+  wifi: `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M2 9a15 15 0 0120 0M5.5 12.5a10 10 0 0113 0M9 16a5 5 0 016 0M12 20h.01"/></svg>`,
+  shield: `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M12 3l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V7l8-4z"/></svg>`,
+  globe: `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M3.6 9h16.8M3.6 15h16.8M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/></svg>`,
 };
 
 function jsonLd(data) {
@@ -61,12 +72,23 @@ ${meta.noindex ? '<meta name="robots" content="noindex">' : '<meta name="robots"
 <link rel="apple-touch-icon" href="${root}apple-touch-icon.png">
 <link rel="manifest" href="${root}site.webmanifest">
 <link rel="stylesheet" href="${root}assets/css/site.css">
-<script>document.documentElement.classList.replace('no-js','js')</script>
+<script>
+(() => {
+  document.documentElement.classList.replace('no-js','js');
+  try {
+    const saved = localStorage.getItem('ab-theme');
+    if (saved === 'dark' || saved === 'light') {
+      document.documentElement.setAttribute('data-theme', saved);
+    }
+  } catch(e) {}
+})();
+</script>
 <script src="${root}assets/js/site.js" defer></script>
 ${jsonLd(meta.jsonLd)}
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
+<div class="reading-progress" id="reading-progress" aria-hidden="true"></div>
 <header class="site-header">
   <nav class="nav container" aria-label="Main">
     <a class="brand" href="${root || './'}" aria-label="AudioBridge home">${icons.logo}<span>AudioBridge</span></a>
@@ -76,6 +98,10 @@ ${jsonLd(meta.jsonLd)}
     <div class="nav-menu" id="nav-menu">
       <ul class="nav-links">${navLinks}</ul>
       <div class="nav-actions">
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle theme" title="Toggle light or dark theme">
+          <span class="theme-toggle-sun" aria-hidden="true">${icons.sun}</span>
+          <span class="theme-toggle-moon" aria-hidden="true">${icons.moon}</span>
+        </button>
         <a class="icon-link" href="${config.repo}" rel="noopener">${icons.github}<span>GitHub</span></a>
         <a class="btn btn-primary btn-sm" href="${root}download/">Download</a>
       </div>
@@ -90,6 +116,10 @@ ${body}
     <div class="footer-brand">
       <a class="brand" href="${root || './'}">${icons.logo}<span>AudioBridge</span></a>
       <p>Free, open-source audio streaming from macOS to Android. Native on both sides. No account, no cloud, no tracking.</p>
+      <div class="footer-status">
+        <span class="status-dot-pulse" aria-hidden="true"></span>
+        <span>AudioBridge v${config.version} · Protocol v1</span>
+      </div>
     </div>
     <nav aria-label="Product">
       <h2>Product</h2>
@@ -121,7 +151,10 @@ ${body}
   </div>
   <div class="container footer-legal">
     <p>© 2026 AudioBridge contributors · <a href="${config.repo}/blob/main/LICENSE" rel="noopener">MIT License</a></p>
-    <p>Not affiliated with Apple or Google. macOS is a trademark of Apple Inc. Android is a trademark of Google LLC.</p>
+    <div class="footer-actions">
+      <a class="back-to-top" href="#main" id="back-to-top">Back to top ↑</a>
+      <p class="trademark">Not affiliated with Apple or Google. macOS is a trademark of Apple Inc. Android is a trademark of Google LLC.</p>
+    </div>
   </div>
 </footer>
 </body>

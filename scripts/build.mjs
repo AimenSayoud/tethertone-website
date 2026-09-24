@@ -40,6 +40,17 @@ const placeholders = {
   'icon.android': icons.android,
   'icon.github': icons.github,
   'icon.arrow': icons.arrow,
+  'icon.sun': icons.sun,
+  'icon.moon': icons.moon,
+  'icon.copy': icons.copy,
+  'icon.check': icons.check,
+  'icon.qr': icons.qr,
+  'icon.info': icons.info,
+  'icon.warn': icons.warn,
+  'icon.usb': icons.usb,
+  'icon.wifi': icons.wifi,
+  'icon.shield': icons.shield,
+  'icon.globe': icons.globe,
 };
 
 function fill(text, root) {

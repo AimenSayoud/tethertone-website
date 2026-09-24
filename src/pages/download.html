@@ -52,6 +52,13 @@
           <a class="btn btn-primary" href="{{apk}}" data-asset="-android.apk">Download .apk</a>
           <a class="btn btn-secondary" href="{{releases}}" rel="noopener">All releases</a>
         </div>
+        <div class="dl-qr-box">
+          <img src="{{root}}assets/img/qr-apk.svg" alt="QR code to download AudioBridge Android APK directly on your phone" width="68" height="68">
+          <div class="dl-qr-text">
+            <strong>Scan to download on phone</strong>
+            <span>Point your phone camera here to get the APK directly.</span>
+          </div>
+        </div>
         <span class="file">AudioBridge-<span data-version>{{version}}</span>-android.apk</span>
       </article>
     </div>
@@ -60,14 +67,16 @@
 
 <div class="container doc">
   <nav class="toc" aria-label="On this page">
-    <h2>On this page</h2>
-    <ol>
-      <li><a href="#install-mac">Install on the Mac</a></li>
-      <li><a href="#install-android">Install on Android</a></li>
-      <li><a href="#usb">Optional: USB</a></li>
-      <li><a href="#verify">Verify the download</a></li>
-      <li><a href="#source">Build from source</a></li>
-    </ol>
+    <details class="toc-collapsible" open>
+      <summary>On this page</summary>
+      <ol>
+        <li><a href="#install-mac">Install on the Mac</a></li>
+        <li><a href="#install-android">Install on Android</a></li>
+        <li><a href="#usb">Optional: USB</a></li>
+        <li><a href="#verify">Verify the download</a></li>
+        <li><a href="#source">Build from source</a></li>
+      </ol>
+    </details>
   </nav>
 
   <article class="prose">
@@ -79,7 +88,10 @@
     </ol>
 
     <div class="callout warn">
-      <p><strong>“AudioBridge can't be opened” on first launch?</strong> The app is signed but not notarized by Apple, which requires a paid developer account. Open <strong>System Settings › Privacy &amp; Security</strong>, scroll down and click <strong>Open Anyway</strong>. Or remove the download quarantine in Terminal:</p>
+      <div class="callout-icon">{{icon.warn}}</div>
+      <div>
+        <p><strong>“AudioBridge can't be opened” on first launch?</strong> The app is signed but not notarized by Apple, which requires a paid developer account. Open <strong>System Settings › Privacy &amp; Security</strong>, scroll down and click <strong>Open Anyway</strong>. Or remove the download quarantine in Terminal:</p>
+      </div>
     </div>
 <pre><code>xattr -dr com.apple.quarantine /Applications/AudioBridge.app</code></pre>
 
@@ -90,7 +102,10 @@
       <li>Open AudioBridge and tap <strong>Scan pairing QR</strong>. It asks for the camera only while scanning, and for notifications so the playback notification can show.</li>
     </ol>
     <div class="callout">
-      <p>Built AudioBridge from source before? Android won't update an app signed with a different key. Uninstall the old build first.</p>
+      <div class="callout-icon">{{icon.info}}</div>
+      <div>
+        <p>Built AudioBridge from source before? Android won't update an app signed with a different key. Uninstall the old build first.</p>
+      </div>
     </div>
 
     <h2 id="usb">Optional: connect over USB</h2>

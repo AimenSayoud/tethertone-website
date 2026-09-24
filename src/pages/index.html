@@ -77,41 +77,68 @@
 
     <div class="hero-art" role="img" aria-label="Illustration: the AudioBridge menu on a Mac streaming over USB and Wi-Fi to the AudioBridge app on an Android phone, which shows a live level meter and connection stats.">
       <div class="mock mock-mac" aria-hidden="true">
-        <div class="mock-menubar"><span>Wed 9:41</span><span class="mb-icon"><svg viewBox="0 0 12 12"><path d="M2 8V6M4.5 9V3M7 10V2M9.5 8V4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span></div>
+        <div class="mock-mac-header">
+          <div class="mock-traffic-lights">
+            <span class="tl-dot tl-red"></span>
+            <span class="tl-dot tl-yellow"></span>
+            <span class="tl-dot tl-green"></span>
+          </div>
+          <span class="mock-mac-appname">AudioBridge</span>
+          <span class="mock-mac-status-tag">Streaming</span>
+        </div>
         <div class="mock-body">
           <div class="mock-row">
-            <div><div class="mock-title">AudioBridge</div><div class="mock-sub">Streaming to 1 device</div></div>
-            <span class="dot"></span>
+            <div><div class="mock-title">System Audio Broadcast</div><div class="mock-sub">Core Audio · 48,000 Hz · Stereo</div></div>
+            <span class="dot pulse"></span>
           </div>
           <div class="mock-seg"><span class="on">Screen Recording</span><span>BlackHole</span></div>
           <div class="mock-client">
-            <div class="mock-row"><strong>Pixel 9</strong><span class="mock-sub">USB</span></div>
-            <code>rtt 2ms · buf 88ms · +204 ppm</code>
+            <div class="mock-row"><strong>Pixel 9 Pro</strong><span class="mock-badge-usb">USB 3.0</span></div>
+            <code>rtt 1.8ms · buf 88ms · +204 ppm</code>
+            <div class="mock-client-wave">
+              <span style="--h:4px;--d:-.1s"></span><span style="--h:9px;--d:-.4s"></span><span style="--h:6px;--d:-.2s"></span><span style="--h:11px;--d:-.6s"></span><span style="--h:8px;--d:-.3s"></span><span style="--h:5px;--d:-.15s"></span><span style="--h:10px;--d:-.5s"></span><span style="--h:4px;--d:-.25s"></span>
+            </div>
           </div>
-          <div class="mock-btn">■ Stop</div>
+          <div class="mock-btn">■ Stop Broadcast</div>
           <div class="mock-btn secondary">Open AudioBridge…</div>
         </div>
       </div>
 
       <div class="link" aria-hidden="true">
-        <div class="link-line"><span class="link-label">USB</span><i></i><i></i><i></i></div>
-        <div class="link-line dashed"><span class="link-label">Wi-Fi</span><i></i><i></i><i></i></div>
+        <div class="link-line"><span class="link-label">USB cable</span><i></i><i></i><i></i></div>
+        <div class="link-line dashed"><span class="link-label">Wi-Fi LAN</span><i></i><i></i><i></i></div>
       </div>
 
       <div class="mock-phone" aria-hidden="true">
         <div class="phone-screen">
-          <div class="app-title">AudioBridge</div>
-          <div class="status-card"><strong><span class="dot"></span>Streaming over usb</strong><span>Studio Mac · 48 kHz stereo</span></div>
-          <div class="meter">
-            <i style="--h:55%;--d:-.2s"></i><i style="--h:80%;--d:-.5s"></i><i style="--h:65%;--d:-.1s"></i><i style="--h:95%;--d:-.7s"></i><i style="--h:70%;--d:-.35s"></i><i style="--h:85%;--d:-.9s"></i><i style="--h:50%;--d:-.25s"></i><i style="--h:75%;--d:-.6s"></i><i style="--h:60%;--d:-.45s"></i><i style="--h:90%;--d:-.15s"></i>
+          <div class="phone-speaker-notch"></div>
+          <div class="phone-header">
+            <div class="app-title">AudioBridge</div>
+            <span class="stream-badge">LIVE</span>
+          </div>
+          <div class="status-card"><strong><span class="dot pulse"></span>Streaming over USB</strong><span>Studio Mac · 48 kHz stereo · 10ms</span></div>
+          <div class="meter-container">
+            <div class="meter-channel">
+              <span class="meter-label">L</span>
+              <div class="meter-bars">
+                <i style="--h:55%;--d:-.2s"></i><i style="--h:80%;--d:-.5s"></i><i style="--h:65%;--d:-.1s"></i><i style="--h:95%;--d:-.7s"></i><i style="--h:70%;--d:-.35s"></i><i style="--h:85%;--d:-.9s"></i><i style="--h:50%;--d:-.25s"></i>
+              </div>
+            </div>
+            <div class="meter-channel">
+              <span class="meter-label">R</span>
+              <div class="meter-bars">
+                <i style="--h:50%;--d:-.15s"></i><i style="--h:75%;--d:-.45s"></i><i style="--h:60%;--d:-.2s"></i><i style="--h:90%;--d:-.65s"></i><i style="--h:72%;--d:-.3s"></i><i style="--h:80%;--d:-.85s"></i><i style="--h:48%;--d:-.2s"></i>
+              </div>
+            </div>
+            <div class="meter-scale"><span>-24dB</span><span>-12dB</span><span>-6dB</span><span>0dB</span></div>
           </div>
           <div class="tiles">
-            <div><b>88</b><small>buffer ms</small></div>
-            <div><b>1536</b><small>kbit/s</small></div>
-            <div><b>0</b><small>underruns</small></div>
-            <div><b>0</b><small>lost packets</small></div>
+            <div><b>88</b><span>buffer ms</span></div>
+            <div><b>1536</b><span>kbit/s</span></div>
+            <div><b>0</b><span>underruns</span></div>
+            <div><b>0</b><span>dropped</span></div>
           </div>
-          <div class="drift"><b>Clock drift</b>playing 204 ppm fast to drain the buffer</div>
+          <div class="drift"><b>Clock drift: +204 ppm</b>playing 204 ppm fast to drain the buffer</div>
         </div>
       </div>
     </div>
@@ -242,10 +269,26 @@
       <p class="lead">One QR code carries every address your Mac can be reached at. The phone tries them all and uses the best one that works.</p>
     </div>
     <div class="routes">
-      <div class="route"><b>USB cable</b><p>The lowest latency, and immune to Wi-Fi congestion. Uses <code>adb reverse</code>, which AudioBridge sets up on its own.</p><span class="meta">Best</span></div>
-      <div class="route"><b>Same Wi-Fi</b><p>No cable, no setup. Works on any home network that lets devices see each other.</p><span class="meta">Default</span></div>
-      <div class="route"><b>Mesh VPN</b><p>Tailscale or ZeroTier on both devices. The address appears in the QR code on its own and works from anywhere.</p><span class="meta">Remote</span></div>
-      <div class="route"><b>Tunnel</b><p>Add an ngrok or cloudflared hostname by hand. The token gates access, but audio isn't encrypted.</p><span class="meta">Advanced</span></div>
+      <div class="route">
+        <div class="route-header"><div class="route-icon">{{icon.usb}}</div><b>USB cable</b></div>
+        <p>The lowest latency, and immune to Wi-Fi congestion. Uses <code>adb reverse</code>, which AudioBridge sets up on its own.</p>
+        <span class="meta">Best · 40–60ms</span>
+      </div>
+      <div class="route">
+        <div class="route-header"><div class="route-icon">{{icon.wifi}}</div><b>Same Wi-Fi</b></div>
+        <p>No cable, no setup. Works on any home network that lets devices see each other.</p>
+        <span class="meta">Default · 90ms</span>
+      </div>
+      <div class="route">
+        <div class="route-header"><div class="route-icon">{{icon.shield}}</div><b>Mesh VPN</b></div>
+        <p>Tailscale or ZeroTier on both devices. The address appears in the QR code on its own and works from anywhere.</p>
+        <span class="meta">Remote · WireGuard</span>
+      </div>
+      <div class="route">
+        <div class="route-header"><div class="route-icon">{{icon.globe}}</div><b>Tunnel</b></div>
+        <p>Add an ngrok or cloudflared hostname by hand. The token gates access, but audio isn't encrypted.</p>
+        <span class="meta">Advanced · WAN</span>
+      </div>
     </div>
   </div>
 </section>
@@ -268,7 +311,10 @@
       </div>
     </div>
     <div class="terminal" role="img" aria-label="Terminal commands that build AudioBridge from source">
-      <div class="terminal-bar" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="terminal-bar" aria-hidden="true">
+        <div class="terminal-dots"><i></i><i></i><i></i></div>
+        <span class="terminal-title">bash — clone &amp; build</span>
+      </div>
 <pre aria-hidden="true"><span class="c"># clone</span>
 <span class="p">$</span> git clone https://github.com/AimenSayoud/audiobridge
 <span class="p">$</span> cd audiobridge
