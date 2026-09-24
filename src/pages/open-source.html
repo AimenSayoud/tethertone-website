@@ -1,0 +1,130 @@
+<!--meta
+{
+  "slug": "open-source",
+  "title": "AudioBridge Open Source: Code, Roadmap and Contributing",
+  "description": "AudioBridge is MIT-licensed open source: a SwiftUI macOS app and a Kotlin Multiplatform Android app. Repository map, roadmap, known gaps and how to contribute.",
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{siteUrl}}/" },
+        { "@type": "ListItem", "position": 2, "name": "Open source", "item": "{{siteUrl}}/open-source/" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareSourceCode",
+      "name": "AudioBridge",
+      "description": "Stream a Mac's audio to an Android phone over USB or Wi-Fi.",
+      "codeRepository": "{{repo}}",
+      "programmingLanguage": ["Swift", "Kotlin", "Python"],
+      "runtimePlatform": ["macOS", "Android", "JVM"],
+      "license": "https://opensource.org/licenses/MIT",
+      "version": "{{version}}"
+    }
+  ]
+}
+-->
+<section class="page-hero">
+  <div class="container">
+    <ol class="breadcrumb"><li><a href="{{root}}">Home</a></li><li aria-current="page">Open source</li></ol>
+    <h1>Open source</h1>
+    <p class="lead">AudioBridge is free software under the MIT License, built in the open by its contributors. These are the project notes: what's there, what's next, and how to help.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="{{repo}}" rel="noopener">{{icon.github}}AimenSayoud/audiobridge</a>
+      <a class="btn btn-secondary" href="{{repo}}/blob/main/CONTRIBUTING.md" rel="noopener">Contributing guide</a>
+    </div>
+  </div>
+</section>
+
+<div class="container doc">
+  <nav class="toc" aria-label="On this page">
+    <h2>On this page</h2>
+    <ol>
+      <li><a href="#glance">At a glance</a></li>
+      <li><a href="#license">License</a></li>
+      <li><a href="#map">Repository map</a></li>
+      <li><a href="#contribute">Contributing</a></li>
+      <li><a href="#principles">Principles</a></li>
+      <li><a href="#roadmap">Roadmap</a></li>
+      <li><a href="#gaps">Known gaps</a></li>
+      <li><a href="#credits">Credits</a></li>
+    </ol>
+  </nav>
+
+  <article class="prose">
+    <h2 id="glance">At a glance</h2>
+    <dl class="stats figure">
+      <div><dt>lines of Swift</dt><dd>~3.1k</dd></div>
+      <div><dt>lines of Kotlin</dt><dd>~3.3k</dd></div>
+      <div><dt>shared-module unit tests</dt><dd>36</dd></div>
+      <div><dt>runtime dependencies on the Mac</dt><dd>0</dd></div>
+    </dl>
+    <p>The Mac app uses only Apple frameworks: SwiftUI, ScreenCaptureKit, AVFoundation, Network and Core Image. The Android app uses Jetpack Compose, CameraX, ZXing and kotlinx. Neither app includes analytics or crash reporting, and neither talks to any server but your own devices.</p>
+
+    <h2 id="license">License</h2>
+    <p>AudioBridge is released under the <a href="{{repo}}/blob/main/LICENSE" rel="noopener">MIT License</a>, © AudioBridge contributors. You may use, copy, modify, merge, publish, distribute, sublicense and sell copies, provided the copyright notice and license text are included. The software comes with no warranty.</p>
+
+    <h2 id="map">Repository map</h2>
+<pre><code>macos/          SwiftUI app: capture, TCP server, QR pairing, adb setup
+android/
+  shared/       Kotlin Multiplatform: protocol, pairing, jitter buffer, client
+  androidApp/   Compose UI, QR scanner, foreground playback service
+  desktopSink/  headless JVM client for testing without a phone
+docs/           ARCHITECTURE, PROTOCOL, BUILDING, TROUBLESHOOTING
+tools/probe.py  independent protocol conformance client
+scripts/        release.sh — builds every release artifact</code></pre>
+    <p>Start with <a href="{{repo}}/blob/main/docs/ARCHITECTURE.md" rel="noopener">ARCHITECTURE.md</a> for the big picture, then <a href="{{repo}}/blob/main/docs/PROTOCOL.md" rel="noopener">PROTOCOL.md</a> for the wire format.</p>
+
+    <h2 id="contribute">Contributing</h2>
+    <p>Bug reports, fixes, documentation and testing on more phones are all welcome.</p>
+    <ol>
+      <li><strong>Found a bug?</strong> Use the <a href="{{repo}}/issues/new/choose" rel="noopener">bug report form</a>. Include your macOS and Android versions, the phone model, the capture method and route, and what the Mac's Activity card shows.</li>
+      <li><strong>Want to fix something?</strong> Fork the repository, make one logical change, and run the same checks CI runs:</li>
+    </ol>
+<pre><code>cd macos &amp;&amp; ./build.sh &amp;&amp; ./AudioBridge.app/Contents/MacOS/AudioBridge --selftest
+cd ../android &amp;&amp; ./gradlew :shared:jvmTest :androidApp:assembleDebug</code></pre>
+    <ol start="3">
+      <li><strong>Open a pull request</strong> describing what changed and how you tested it, on which Mac and which phone.</li>
+    </ol>
+    <p>Security issues go through <a href="{{repo}}/security/advisories/new" rel="noopener">private advisories</a>, not public issues. Everyone taking part follows the <a href="{{repo}}/blob/main/CODE_OF_CONDUCT.md" rel="noopener">Code of Conduct</a>.</p>
+
+    <h2 id="principles">Principles</h2>
+    <ul>
+      <li><strong>Native on both sides.</strong> Swift on the Mac for ScreenCaptureKit and proper permission handling; Kotlin on Android for <code>AudioTrack</code> and a real foreground service.</li>
+      <li><strong>Two implementations, one contract.</strong> Any protocol change updates the spec, the Swift codec and self-test, the Kotlin codec and tests, and the Python probe together.</li>
+      <li><strong>Platform-free core.</strong> The client's logic lives in <code>commonMain</code> with no Android types, so it is tested on the JVM in seconds.</li>
+      <li><strong>Honest UI.</strong> Show real numbers: RTT, underruns, loss, drift. When something can't be done, say so and say what to do instead.</li>
+      <li><strong>Your devices only.</strong> No accounts, no telemetry, no cloud relay.</li>
+    </ul>
+
+    <h2 id="roadmap">Roadmap</h2>
+    <p>Candidates, not promises. Discussion and pull requests welcome.</p>
+    <ul class="roadmap">
+      <li><span class="state done">Shipped</span><div><b>0.1.0: first public release</b><span class="d">Universal macOS app, Android app, USB and Wi-Fi, drift correction, QR pairing.</span></div></li>
+      <li><span class="state next">Next</span><div><b>Core Audio process taps</b><span class="d">macOS 14.2+ can capture system audio with only the “System Audio Recording” permission, with no Screen Recording indicator and no BlackHole.</span></div></li>
+      <li><span class="state next">Next</span><div><b>Optional Opus compression</b><span class="d">About 128 kbit/s instead of 1.5 Mbit/s, for VPN and mobile-data use.</span></div></li>
+      <li><span class="state next">Next</span><div><b>Encrypted transport</b><span class="d">Keep the one-scan pairing, but encrypt the stream for untrusted networks.</span></div></li>
+      <li><span class="state next">Next</span><div><b>Notarized macOS builds and store listings</b><span class="d">No Gatekeeper prompt; F-Droid and Google Play distribution.</span></div></li>
+      <li><span class="state idea">Idea</span><div><b>More platforms</b><span class="d">Windows and Linux senders, or an iOS receiver, built on the documented protocol.</span></div></li>
+      <li><span class="state idea">Idea</span><div><b>Per-app capture</b><span class="d">Stream one app, not the whole mix.</span></div></li>
+    </ul>
+
+    <h2 id="gaps">Known gaps</h2>
+    <ul>
+      <li><strong>No encryption.</strong> The token authenticates; it doesn't conceal. Use USB or a VPN on untrusted networks.</li>
+      <li><strong>Not notarized.</strong> macOS asks you to confirm the first launch.</li>
+      <li><strong>Multiple listeners</strong> are supported but tested only with two phones.</li>
+      <li><strong>Build tooling:</strong> the Kotlin Multiplatform + <code>com.android.library</code> plugin pairing is deprecated in AGP 9 and needs migrating before AGP 10.</li>
+    </ul>
+
+    <h2 id="credits">Credits</h2>
+    <ul>
+      <li><a href="https://github.com/ExistentialAudio/BlackHole" rel="noopener">BlackHole</a> by Existential Audio, the optional loopback driver. It isn't bundled.</li>
+      <li><a href="https://github.com/zxing/zxing" rel="noopener">ZXing</a> for QR decoding, and <a href="https://developer.android.com/jetpack/androidx/releases/camera" rel="noopener">CameraX</a> for the camera.</li>
+      <li><a href="https://developer.android.com/compose" rel="noopener">Jetpack Compose</a>, <a href="https://kotlinlang.org/docs/multiplatform.html" rel="noopener">Kotlin Multiplatform</a> and kotlinx.coroutines / serialization.</li>
+    </ul>
+    <p>The source of this website is also open: <a href="{{siteRepo}}" rel="noopener">AimenSayoud/audiobridge-website</a>.</p>
+  </article>
+</div>

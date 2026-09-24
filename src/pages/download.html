@@ -1,0 +1,118 @@
+<!--meta
+{
+  "slug": "download",
+  "title": "Download AudioBridge for macOS and Android — Free",
+  "description": "Download AudioBridge free for macOS 14+ (Apple Silicon and Intel) and Android 8+. Install steps, first-launch help, checksums and building from source.",
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{siteUrl}}/" },
+        { "@type": "ListItem", "position": 2, "name": "Download", "item": "{{siteUrl}}/download/" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "AudioBridge",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "macOS 14 or later, Android 8.0 or later",
+      "softwareVersion": "{{version}}",
+      "downloadUrl": ["{{dmg}}", "{{pkg}}", "{{apk}}"],
+      "license": "https://opensource.org/licenses/MIT",
+      "isAccessibleForFree": true,
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    }
+  ]
+}
+-->
+<section class="page-hero">
+  <div class="container">
+    <ol class="breadcrumb"><li><a href="{{root}}">Home</a></li><li aria-current="page">Download</li></ol>
+    <h1>Download AudioBridge</h1>
+    <p class="lead">Version <span data-version>{{version}}</span>. Free and open source. You need both apps: one on the Mac that sends the audio, one on the phone that plays it.</p>
+
+    <div class="dl-grid">
+      <article class="dl-card" data-platform="macos">
+        <span class="badge-rec">For this device</span>
+        <div class="platform">{{icon.apple}}<h2>macOS</h2></div>
+        <p class="req">macOS 14 Sonoma or later · Apple Silicon and Intel · 750 KB</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="{{dmg}}" data-asset="-macos.dmg">Download .dmg</a>
+          <a class="btn btn-secondary" href="{{pkg}}" data-asset="-macos.pkg">Installer .pkg</a>
+        </div>
+        <span class="file">AudioBridge-<span data-version>{{version}}</span>-macos.dmg</span>
+      </article>
+      <article class="dl-card" data-platform="android">
+        <span class="badge-rec">For this device</span>
+        <div class="platform">{{icon.android}}<h2>Android</h2></div>
+        <p class="req">Android 8.0 or later · phones and tablets · 9 MB</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="{{apk}}" data-asset="-android.apk">Download .apk</a>
+          <a class="btn btn-secondary" href="{{releases}}" rel="noopener">All releases</a>
+        </div>
+        <span class="file">AudioBridge-<span data-version>{{version}}</span>-android.apk</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<div class="container doc">
+  <nav class="toc" aria-label="On this page">
+    <h2>On this page</h2>
+    <ol>
+      <li><a href="#install-mac">Install on the Mac</a></li>
+      <li><a href="#install-android">Install on Android</a></li>
+      <li><a href="#usb">Optional: USB</a></li>
+      <li><a href="#verify">Verify the download</a></li>
+      <li><a href="#source">Build from source</a></li>
+    </ol>
+  </nav>
+
+  <article class="prose">
+    <h2 id="install-mac">Install on the Mac</h2>
+    <ol>
+      <li>Open the <code>.dmg</code> and drag <strong>AudioBridge</strong> into <strong>Applications</strong>. If you prefer an installer, the <code>.pkg</code> does the same thing and opens the app when it finishes.</li>
+      <li>Open AudioBridge from Applications or Spotlight.</li>
+      <li>Press <strong>Start</strong>. macOS asks for one permission, depending on the <a href="{{root}}guide/#capture">capture method</a>: <em>Screen &amp; System Audio Recording</em> by default, or <em>Microphone</em> for BlackHole.</li>
+    </ol>
+
+    <div class="callout warn">
+      <p><strong>“AudioBridge can't be opened” on first launch?</strong> The app is signed but not notarized by Apple, which requires a paid developer account. Open <strong>System Settings › Privacy &amp; Security</strong>, scroll down and click <strong>Open Anyway</strong>. Or remove the download quarantine in Terminal:</p>
+    </div>
+<pre><code>xattr -dr com.apple.quarantine /Applications/AudioBridge.app</code></pre>
+
+    <h2 id="install-android">Install on Android</h2>
+    <ol>
+      <li>Download the <code>.apk</code> on your phone. You can also copy it over from the Mac, or install it with <code>adb install</code>.</li>
+      <li>Open it. If Android asks, allow your browser or file manager to install apps.</li>
+      <li>Open AudioBridge and tap <strong>Scan pairing QR</strong>. It asks for the camera only while scanning, and for notifications so the playback notification can show.</li>
+    </ol>
+    <div class="callout">
+      <p>Built AudioBridge from source before? Android won't update an app signed with a different key. Uninstall the old build first.</p>
+    </div>
+
+    <h2 id="usb">Optional: connect over USB</h2>
+    <p>Wi-Fi needs nothing extra. For the lower-latency USB route:</p>
+    <ol>
+      <li>Enable <a href="https://developer.android.com/studio/debug/dev-options#enable" rel="noopener">USB debugging</a> on the phone.</li>
+      <li>Install <code>adb</code> on the Mac:</li>
+    </ol>
+<pre><code>brew install android-platform-tools</code></pre>
+    <p>Plug in the phone and accept the <em>Allow USB debugging?</em> prompt. AudioBridge sets up <code>adb reverse</code> by itself and puts the cable first in the QR code.</p>
+
+    <h2 id="verify">Verify the download</h2>
+    <p>Every release publishes a <a href="{{sums}}" data-asset="SHA256SUMS">SHA256SUMS</a> file. Compare it with:</p>
+<pre><code>shasum -a 256 AudioBridge-*</code></pre>
+    <p>The Android APK is signed with the project's release key. Its certificate SHA-256 fingerprint is:</p>
+<pre><code>B4:82:0A:7A:9E:FC:EA:23:99:5C:3A:F0:9E:26:52:0D:92:09:91:AC:FE:1C:D1:43:A5:9D:8F:0B:34:F7:09:2E</code></pre>
+
+    <h2 id="source">Build from source</h2>
+    <p>The macOS app needs only the Xcode Command Line Tools; the Android app needs JDK 17 and the Android SDK.</p>
+<pre><code>git clone https://github.com/AimenSayoud/audiobridge.git
+cd audiobridge/macos &amp;&amp; ./make-signing-identity.sh &amp;&amp; ./build.sh --install
+cd ../android &amp;&amp; ./gradlew :androidApp:installDebug</code></pre>
+    <p>See <a href="{{repo}}/blob/main/docs/BUILDING.md" rel="noopener">BUILDING.md</a> for tests, release builds and signing.</p>
+  </article>
+</div>

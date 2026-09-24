@@ -1,0 +1,317 @@
+<!--meta
+{
+  "slug": "index",
+  "title": "AudioBridge — Stream Mac Audio to Android over USB or Wi-Fi",
+  "ogTitle": "AudioBridge — your Mac's audio on your Android phone",
+  "description": "Free, open-source app that streams your Mac's audio to your Android phone over USB or Wi-Fi. Lossless PCM, low latency, QR pairing. macOS 14+ and Android 8+.",
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "AudioBridge",
+      "url": "{{siteUrl}}/",
+      "description": "Stream your Mac's audio to your Android phone over USB or Wi-Fi."
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "AudioBridge",
+      "description": "Streams a Mac's system audio to an Android phone over USB or Wi-Fi as lossless PCM, with QR pairing, a jitter buffer and continuous clock-drift correction.",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "macOS 14 or later, Android 8.0 or later",
+      "softwareVersion": "{{version}}",
+      "datePublished": "{{releaseDate}}",
+      "license": "https://opensource.org/licenses/MIT",
+      "isAccessibleForFree": true,
+      "url": "{{siteUrl}}/",
+      "downloadUrl": "{{releases}}",
+      "image": "{{siteUrl}}/assets/img/og-image.png",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "author": { "@type": "Organization", "name": "AudioBridge contributors", "url": "{{repo}}" },
+      "sameAs": ["{{repo}}"]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareSourceCode",
+      "name": "AudioBridge",
+      "codeRepository": "{{repo}}",
+      "programmingLanguage": ["Swift", "Kotlin"],
+      "license": "https://opensource.org/licenses/MIT",
+      "runtimePlatform": ["macOS", "Android"]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "Can I use my Android phone as a speaker for my Mac?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Install AudioBridge on the Mac and on the phone, press Start on the Mac and scan the QR code with the phone. Everything the Mac plays is then streamed to the phone's speaker or headphones, over a USB cable or Wi-Fi." } },
+        { "@type": "Question", "name": "Is AudioBridge free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. AudioBridge is free and open source under the MIT License. There are no ads, no accounts, no subscriptions and no tracking." } },
+        { "@type": "Question", "name": "Does it work over USB or only over Wi-Fi?", "acceptedAnswer": { "@type": "Answer", "text": "Both. Over USB it uses adb reverse, which needs USB debugging on the phone and adb on the Mac. Over Wi-Fi both devices must be on the same network. The pairing code lists every route and the phone uses whichever answers first, so the cable wins when it is plugged in." } },
+        { "@type": "Question", "name": "How much latency does AudioBridge add?", "acceptedAnswer": { "@type": "Answer", "text": "Latency is mostly the phone's jitter buffer, which you set between 20 and 250 ms; the default is 90 ms. Measured on USB with the default setting, the buffer held between 40 and 110 ms with no lost packets. Lower settings reduce latency at the cost of more dropouts on a busy network." } },
+        { "@type": "Question", "name": "Why does macOS ask for Screen Recording permission?", "acceptedAnswer": { "@type": "Answer", "text": "The default capture method uses ScreenCaptureKit, the only macOS API that provides the whole system audio mix without a virtual driver. It has no audio-only mode, so macOS files it under screen recording. AudioBridge never reads an image. To avoid the permission, install BlackHole and switch the capture method to BlackHole, which needs only the Microphone permission." } },
+        { "@type": "Question", "name": "Do I need BlackHole or Soundflower?", "acceptedAnswer": { "@type": "Answer", "text": "No. The default Screen Recording method needs nothing installed. BlackHole is an optional alternative for people who prefer not to grant the Screen Recording permission." } },
+        { "@type": "Question", "name": "Is the audio encrypted?", "acceptedAnswer": { "@type": "Answer", "text": "No. A random token in the QR code stops other people on your network from connecting, but the audio itself travels unencrypted. On a network you do not trust, use the USB cable or a VPN such as Tailscale." } },
+        { "@type": "Question", "name": "Does it work with iPhone, Windows or Linux?", "acceptedAnswer": { "@type": "Answer", "text": "Not yet. The sender is a macOS app and the receiver is an Android app. The wire protocol is documented, so other senders and receivers can be built on it." } },
+        { "@type": "Question", "name": "How much data does streaming use?", "acceptedAnswer": { "@type": "Answer", "text": "About 1.5 Mbit/s, roughly 690 MB per hour, because the audio is uncompressed 16-bit stereo PCM. That is nothing over USB or home Wi-Fi, but expensive on a metered mobile connection." } },
+        { "@type": "Question", "name": "Can several phones listen at the same time?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The Mac serves any number of phones at once, each with its own send queue so a slow phone cannot hold up the others. It has been tested with two." } }
+      ]
+    }
+  ]
+}
+-->
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <a class="pill" href="{{releases}}" rel="noopener"><b>New</b><span>Version <span data-version>{{version}}</span> is out — first public release</span></a>
+      <h1>Your Mac's audio,<br><span class="gradient-text">on your Android phone.</span></h1>
+      <p class="lead">AudioBridge streams everything your Mac plays to your Android phone, over a USB cable or Wi-Fi. It's lossless, keeps latency low for hours, and pairs with one QR scan. Free, open source and native on both sides.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary btn-lg" href="{{dmg}}" data-asset="-macos.dmg">{{icon.apple}}<span class="btn-label">Download for Mac<small>macOS 14+ · Apple Silicon &amp; Intel</small></span></a>
+        <a class="btn btn-secondary btn-lg" href="{{apk}}" data-asset="-android.apk">{{icon.android}}<span class="btn-label">Get the Android app<small>Android 8.0+ · APK</small></span></a>
+      </div>
+      <ul class="hero-meta">
+        <li>Free &amp; MIT licensed</li>
+        <li>No account, no cloud</li>
+        <li>No tracking</li>
+      </ul>
+    </div>
+
+    <div class="hero-art" role="img" aria-label="Illustration: the AudioBridge menu on a Mac streaming over USB and Wi-Fi to the AudioBridge app on an Android phone, which shows a live level meter and connection stats.">
+      <div class="mock mock-mac" aria-hidden="true">
+        <div class="mock-menubar"><span>Wed 9:41</span><span class="mb-icon"><svg viewBox="0 0 12 12"><path d="M2 8V6M4.5 9V3M7 10V2M9.5 8V4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span></div>
+        <div class="mock-body">
+          <div class="mock-row">
+            <div><div class="mock-title">AudioBridge</div><div class="mock-sub">Streaming to 1 device</div></div>
+            <span class="dot"></span>
+          </div>
+          <div class="mock-seg"><span class="on">Screen Recording</span><span>BlackHole</span></div>
+          <div class="mock-client">
+            <div class="mock-row"><strong>Pixel 9</strong><span class="mock-sub">USB</span></div>
+            <code>rtt 2ms · buf 88ms · +204 ppm</code>
+          </div>
+          <div class="mock-btn">■ Stop</div>
+          <div class="mock-btn secondary">Open AudioBridge…</div>
+        </div>
+      </div>
+
+      <div class="link" aria-hidden="true">
+        <div class="link-line"><span class="link-label">USB</span><i></i><i></i><i></i></div>
+        <div class="link-line dashed"><span class="link-label">Wi-Fi</span><i></i><i></i><i></i></div>
+      </div>
+
+      <div class="mock-phone" aria-hidden="true">
+        <div class="phone-screen">
+          <div class="app-title">AudioBridge</div>
+          <div class="status-card"><strong><span class="dot"></span>Streaming over usb</strong><span>Studio Mac · 48 kHz stereo</span></div>
+          <div class="meter">
+            <i style="--h:55%;--d:-.2s"></i><i style="--h:80%;--d:-.5s"></i><i style="--h:65%;--d:-.1s"></i><i style="--h:95%;--d:-.7s"></i><i style="--h:70%;--d:-.35s"></i><i style="--h:85%;--d:-.9s"></i><i style="--h:50%;--d:-.25s"></i><i style="--h:75%;--d:-.6s"></i><i style="--h:60%;--d:-.45s"></i><i style="--h:90%;--d:-.15s"></i>
+          </div>
+          <div class="tiles">
+            <div><b>88</b><small>buffer ms</small></div>
+            <div><b>1536</b><small>kbit/s</small></div>
+            <div><b>0</b><small>underruns</small></div>
+            <div><b>0</b><small>lost packets</small></div>
+          </div>
+          <div class="drift"><b>Clock drift</b>playing 204 ppm fast to drain the buffer</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="trust" aria-label="At a glance">
+  <div class="container">
+    <ul>
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M8 9l-4 3 4 3M16 9l4 3-4 3M13.5 5l-3 14"/></svg>Native Swift &amp; Kotlin</li>
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M4 14v-4M8 17V7M12 20V4M16 16V8M20 13v-2"/></svg>Lossless 16-bit PCM</li>
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M12 3v14M8 7l4-4 4 4M7 13v2a5 5 0 0010 0v-2M12 21v-4"/></svg>USB and Wi-Fi at once</li>
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6l7-3z"/></svg>No tracking, no cloud</li>
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M4 12a8 8 0 1016 0 8 8 0 00-16 0zM9.5 9.5a3.5 3.5 0 110 5M14.5 9.5a3.5 3.5 0 000 5"/></svg>MIT licensed</li>
+    </ul>
+  </div>
+</section>
+
+<section class="section" id="features" aria-labelledby="features-title">
+  <div class="container">
+    <div class="section-head center">
+      <p class="eyebrow">Features</p>
+      <h2 id="features-title">Built like an audio tool, not a screen-sharing hack</h2>
+      <p class="lead">Two native apps and a small, documented protocol. Each part is built for one job: get the sound from your Mac to your phone intact, on time, and in sync.</p>
+    </div>
+    <div class="feature-grid">
+      <article class="feature">
+        <div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M3 5h18v11H3zM8 20h8M12 16v4"/></svg></div>
+        <h3>Two ways to capture</h3>
+        <p>Read the system mix directly with ScreenCaptureKit (nothing to install), or read a BlackHole loopback device with AVAudioEngine (Microphone permission only). Switch any time.</p>
+      </article>
+      <article class="feature">
+        <div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M2 9a15 15 0 0120 0M5.5 12.5a10 10 0 0113 0M9 16a5 5 0 016 0M12 20h.01"/></svg></div>
+        <h3>USB and Wi-Fi at once</h3>
+        <p>The QR code lists every route to your Mac. The phone races them and keeps whichever answers first, so the cable wins when it's plugged in and Wi-Fi takes over when it isn't.</p>
+      </article>
+      <article class="feature">
+        <div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M12 7v5l3 2M21 12a9 9 0 11-9-9"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M17 3l4 0 0 4"/></svg></div>
+        <h3>Stays in sync for hours</h3>
+        <p>Two devices never agree on how long a second is. AudioBridge corrects the difference continuously by playing a fraction of a percent fast or slow. It's inaudible, with no jumps and no creeping delay.</p>
+      </article>
+      <article class="feature">
+        <div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h2v2h-2zM18 18h2v2h-2zM14 18h2M18 14h2"/></svg></div>
+        <h3>Pair once with a QR code</h3>
+        <p>Scan the code and you're done. The phone remembers the Mac, reconnects on its own, and a random token keeps everyone else on your network out.</p>
+      </article>
+      <article class="feature">
+        <div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M7 2h10a1 1 0 011 1v18a1 1 0 01-1 1H7a1 1 0 01-1-1V3a1 1 0 011-1zM11 18h2"/></svg></div>
+        <h3>Plays with the screen off</h3>
+        <p>A foreground service keeps audio going when the phone locks, with a Stop button in the notification. Put the phone in your pocket and walk around.</p>
+      </article>
+      <article class="feature">
+        <div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M3 3v18h18M7 15l4-4 3 3 5-6"/></svg></div>
+        <h3>Diagnostics you can read</h3>
+        <p>Round-trip time, buffer depth, underruns, lost packets and drift correction, live on both devices. When something goes wrong, you can see where.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section section-soft" aria-labelledby="setup-title">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Setup</p>
+      <h2 id="setup-title">Three steps, about a minute</h2>
+      <p class="lead">No accounts, no drivers, no Audio MIDI Setup unless you want it.</p>
+    </div>
+    <ol class="steps">
+      <li><h3>Start on the Mac</h3><p>Open AudioBridge and press <strong>Start</strong> in the menu bar. macOS asks once for the permission the capture method needs.</p></li>
+      <li><h3>Scan the QR code</h3><p>On the phone, tap <strong>Scan pairing QR</strong> and point it at the code on the Mac's Pairing tab. Plug in the USB cable too if you like.</p></li>
+      <li><h3>Play anything</h3><p>Music, video, calls, games: whatever the Mac plays comes out of the phone. Next time, just press Start and the phone reconnects.</p></li>
+    </ol>
+    <p class="footnote"><a class="btn btn-ghost" href="{{root}}guide/">Read the full setup guide {{icon.arrow}}</a></p>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="pipeline-title">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Under the hood</p>
+      <h2 id="pipeline-title">From Core Audio to AudioTrack</h2>
+      <p class="lead">No codec, no browser, no WebRTC. Raw PCM in 10&nbsp;ms packets over a plain TCP socket, into a jitter buffer that keeps itself at the target depth.</p>
+    </div>
+    <ol class="pipeline">
+      <li><small>Capture</small><b>macOS</b><span>ScreenCaptureKit or AVAudioEngine</span></li>
+      <li><small>Packetize</small><b>10 ms blocks</b><span>16-bit PCM, 8-byte header, sequence numbers</span></li>
+      <li><small>Transport</small><b>TCP</b><span>USB via adb reverse, or Wi-Fi</span></li>
+      <li><small>Buffer</small><b>Jitter buffer</b><span>90 ms target, 20–250 ms adjustable</span></li>
+      <li><small>Play</small><b>AudioTrack</b><span>rate-trimmed to cancel clock drift</span></li>
+    </ol>
+    <dl class="stats">
+      <div><dt>stream bitrate</dt><dd>1520 kbit/s</dd></div>
+      <div><dt>lost packets</dt><dd>0</dd></div>
+      <div><dt>buffer range</dt><dd>40–110 ms</dd></div>
+      <div><dt>drift corrected</dt><dd>~200 ppm</dd></div>
+    </dl>
+    <p class="footnote">Measured on the USB route with the default 90 ms target buffer. <a href="{{root}}how-it-works/">How it works in detail</a>.</p>
+  </div>
+</section>
+
+<section class="section section-soft" aria-labelledby="capture-title">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Capture methods</p>
+      <h2 id="capture-title">Your choice of permission</h2>
+      <p class="lead">macOS offers two ways to hear what the Mac is playing. AudioBridge supports both, and you switch between them from the window.</p>
+    </div>
+    <div class="duo">
+      <article class="card">
+        <h3>Screen Recording <span class="tag">Default</span></h3>
+        <p>Reads the system audio mix directly through ScreenCaptureKit. Nothing to install and your speakers keep working. macOS files it under screen recording because the API has no audio-only mode, but no image is ever read.</p>
+        <dl><dt>API</dt><dd>ScreenCaptureKit</dd><dt>Install</dt><dd>Nothing</dd><dt>Permission</dt><dd>Screen &amp; System Audio Recording</dd></dl>
+      </article>
+      <article class="card">
+        <h3>BlackHole</h3>
+        <p>Reads the free BlackHole loopback driver with AVAudioEngine. It needs only the Microphone permission. Turn on <em>Hear it on this Mac too</em> and your speakers keep playing.</p>
+        <dl><dt>API</dt><dd>AVAudioEngine</dd><dt>Install</dt><dd><a href="https://github.com/ExistentialAudio/BlackHole" rel="noopener">BlackHole 2ch</a></dd><dt>Permission</dt><dd>Microphone</dd></dl>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="routes-title">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Connections</p>
+      <h2 id="routes-title">Cable, Wi-Fi, or anywhere</h2>
+      <p class="lead">One QR code carries every address your Mac can be reached at. The phone tries them all and uses the best one that works.</p>
+    </div>
+    <div class="routes">
+      <div class="route"><b>USB cable</b><p>The lowest latency, and immune to Wi-Fi congestion. Uses <code>adb reverse</code>, which AudioBridge sets up on its own.</p><span class="meta">Best</span></div>
+      <div class="route"><b>Same Wi-Fi</b><p>No cable, no setup. Works on any home network that lets devices see each other.</p><span class="meta">Default</span></div>
+      <div class="route"><b>Mesh VPN</b><p>Tailscale or ZeroTier on both devices. The address appears in the QR code on its own and works from anywhere.</p><span class="meta">Remote</span></div>
+      <div class="route"><b>Tunnel</b><p>Add an ngrok or cloudflared hostname by hand. The token gates access, but audio isn't encrypted.</p><span class="meta">Advanced</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-soft" aria-labelledby="oss-title">
+  <div class="container oss">
+    <div>
+      <p class="eyebrow">Open source</p>
+      <h2 id="oss-title">Read it, build it, change it</h2>
+      <p class="lead">AudioBridge is MIT licensed and developed in the open. The whole project is small enough to read in an afternoon.</p>
+      <ul class="checks">
+        <li>A SwiftUI app for macOS that builds with just the Command Line Tools</li>
+        <li>A Kotlin Multiplatform client whose logic runs and is tested on the plain JVM</li>
+        <li>A documented wire protocol with identical test vectors in Swift and Kotlin</li>
+        <li>An independent Python probe that checks any server</li>
+      </ul>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="{{repo}}" rel="noopener">{{icon.github}}Star on GitHub</a>
+        <a class="btn btn-ghost" href="{{root}}open-source/">Project notes and roadmap {{icon.arrow}}</a>
+      </div>
+    </div>
+    <div class="terminal" role="img" aria-label="Terminal commands that build AudioBridge from source">
+      <div class="terminal-bar" aria-hidden="true"><i></i><i></i><i></i></div>
+<pre aria-hidden="true"><span class="c"># clone</span>
+<span class="p">$</span> git clone https://github.com/AimenSayoud/audiobridge
+<span class="p">$</span> cd audiobridge
+
+<span class="c"># macOS app — no Xcode needed</span>
+<span class="p">$</span> cd macos &amp;&amp; ./build.sh --install
+<span class="ok">[sign] signature verified</span>
+
+<span class="c"># Android app</span>
+<span class="p">$</span> cd ../android &amp;&amp; ./gradlew installDebug
+<span class="ok">BUILD SUCCESSFUL</span></pre>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="faq" aria-labelledby="faq-title">
+  <div class="container">
+    <div class="section-head center">
+      <p class="eyebrow">FAQ</p>
+      <h2 id="faq-title">Questions, answered</h2>
+    </div>
+    <div class="faq">
+      <details><summary>Can I use my Android phone as a speaker for my Mac?</summary><div class="answer"><p>Yes. Install AudioBridge on the Mac and on the phone, press Start on the Mac and scan the QR code with the phone. Everything the Mac plays is then streamed to the phone's speaker or headphones, over a USB cable or Wi-Fi.</p></div></details>
+      <details><summary>Is AudioBridge free?</summary><div class="answer"><p>Yes. AudioBridge is free and open source under the MIT License. There are no ads, no accounts, no subscriptions and no tracking.</p></div></details>
+      <details><summary>Does it work over USB or only over Wi-Fi?</summary><div class="answer"><p>Both. Over USB it uses <code>adb reverse</code>, which needs USB debugging on the phone and adb on the Mac. Over Wi-Fi both devices must be on the same network. The pairing code lists every route and the phone uses whichever answers first, so the cable wins when it is plugged in.</p></div></details>
+      <details><summary>How much latency does AudioBridge add?</summary><div class="answer"><p>Latency is mostly the phone's jitter buffer, which you set between 20 and 250 ms; the default is 90 ms. Measured on USB with the default setting, the buffer held between 40 and 110 ms with no lost packets. Lower settings reduce latency at the cost of more dropouts on a busy network.</p></div></details>
+      <details><summary>Why does macOS ask for Screen Recording permission?</summary><div class="answer"><p>The default capture method uses ScreenCaptureKit, the only macOS API that provides the whole system audio mix without a virtual driver. It has no audio-only mode, so macOS files it under screen recording. AudioBridge never reads an image. To avoid the permission, install BlackHole and switch the capture method to BlackHole, which needs only the Microphone permission.</p></div></details>
+      <details><summary>Do I need BlackHole or Soundflower?</summary><div class="answer"><p>No. The default Screen Recording method needs nothing installed. BlackHole is an optional alternative for people who prefer not to grant the Screen Recording permission.</p></div></details>
+      <details><summary>Is the audio encrypted?</summary><div class="answer"><p>No. A random token in the QR code stops other people on your network from connecting, but the audio itself travels unencrypted. On a network you do not trust, use the USB cable or a VPN such as Tailscale.</p></div></details>
+      <details><summary>Does it work with iPhone, Windows or Linux?</summary><div class="answer"><p>Not yet. The sender is a macOS app and the receiver is an Android app. The wire protocol is documented, so other senders and receivers can be built on it.</p></div></details>
+      <details><summary>How much data does streaming use?</summary><div class="answer"><p>About 1.5 Mbit/s, roughly 690 MB per hour, because the audio is uncompressed 16-bit stereo PCM. That is nothing over USB or home Wi-Fi, but expensive on a metered mobile connection.</p></div></details>
+      <details><summary>Can several phones listen at the same time?</summary><div class="answer"><p>Yes. The Mac serves any number of phones at once, each with its own send queue so a slow phone cannot hold up the others. It has been tested with two.</p></div></details>
+    </div>
+  </div>
+</section>
+
+<section class="container" aria-labelledby="cta-title">
+  <div class="cta-band">
+    <h2 id="cta-title">Turn your phone into your Mac's speaker</h2>
+    <p>Free for everyone, forever. Download both apps and you'll be listening in about a minute.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary btn-lg" href="{{root}}download/">Download AudioBridge</a>
+      <a class="btn btn-secondary btn-lg" href="{{repo}}" rel="noopener">{{icon.github}}View source</a>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,25 @@
+{
+  "name": "audiobridge-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Website for AudioBridge \u2014 stream your Mac's audio to your Android phone.",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "node scripts/check.mjs",
+    "validate": "html-validate \"dist/**/*.html\"",
+    "lighthouse": "lhci autorun",
+    "serve": "node scripts/serve.mjs",
+    "icons": "python3 scripts/icons.py",
+    "ci": "npm run build && npm run check && npm run validate && npm run lighthouse",
+    "og": "\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" --headless=new --hide-scrollbars --window-size=1200,630 --screenshot=\"$PWD/src/assets/img/og-image.png\" \"file://$PWD/scripts/og-image.html\""
+  },
+  "devDependencies": {
+    "@lhci/cli": "^0.15.0",
+    "html-validate": "^9.0.0"
+  }
+}
