@@ -34,6 +34,8 @@ scripts/check.mjs      SEO and link lint (fails the build)
 scripts/serve.mjs      local preview server
 scripts/icons.py       renders PNG icons (Pillow)
 scripts/og-image.html  template for the 1200×630 social image
+scripts/indexnow.mjs   tells Bing & co. which pages changed (run by CI after deploy)
+marketing/LAUNCH_KIT.md  launch copy and search-engine setup steps (not published)
 ```
 
 ### Writing a page

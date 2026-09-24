@@ -7,7 +7,9 @@
         "http://localhost/download/index.html",
         "http://localhost/guide/index.html",
         "http://localhost/how-it-works/index.html",
-        "http://localhost/open-source/index.html"
+        "http://localhost/open-source/index.html",
+        "http://localhost/compare/index.html",
+        "http://localhost/android-phone-as-mac-speaker/index.html"
       ],
       "numberOfRuns": 1,
       "settings": {

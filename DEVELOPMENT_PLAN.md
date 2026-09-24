@@ -110,9 +110,30 @@ It also fixed three regressions: home performance fell from 100 to 85
 overflowed on phones (grid column `1fr` → `minmax(0, 1fr)`); and the hero
 drawing took 900 px of a phone screen (the Mac drawing is hidden below 560 px).
 
-### Phase 8 — After launch (owner actions and ideas)
-- [ ] Verify the site in [Google Search Console](https://search.google.com/search-console) and submit `sitemap.xml`
-- [ ] Same for [Bing Webmaster Tools](https://www.bing.com/webmasters)
+### Phase 8 — Search and AI discoverability ✅
+Based on 2026 guidance: Google needs no special markup for AI Overviews, and
+AI citations come mostly from pages that already rank. ChatGPT search and
+Copilot draw on Bing's index. Freshness helps when dates are honest.
+`llms.txt` is barely read by crawlers, so it's published only as a cheap extra.
+
+- [x] Pages aimed at real searches: `/android-phone-as-mac-speaker/` (how-to)
+      and `/compare/` (sourced comparison with AudioRelay and Airfoil)
+- [x] “In short” summaries at the top of every article, so skimmers and
+      answer engines get the answer first
+- [x] Visible byline and date; the same date in JSON-LD `dateModified` and the
+      sitemap `lastmod`, taken from the git history of each page
+- [x] `Organization` and `alternateName: AudioBridge` structured data
+- [x] IndexNow: key file at the root, and CI submits only the pages that changed
+      after each deploy (manual workflow run resubmits everything)
+- [x] Slots for Google and Bing verification tags in `site.config.mjs`
+- [x] `llms.txt` generated from page metadata
+- [x] Internal links: a Guides section on the home page and footer links
+- [x] Launch kit with ready copy and account steps: `marketing/LAUNCH_KIT.md`
+- [x] F-Droid metadata and submission draft in the app repo (`docs/FDROID.md`)
+
+### Phase 9 — After launch (owner actions and ideas)
+- [ ] Work through `marketing/LAUNCH_KIT.md`: Search Console, Bing, GitHub
+      social preview, Show HN, Reddit, AlternativeTo, awesome lists, F-Droid
 - [ ] Optional custom domain: set `SITE_URL` in `site.config.mjs`, add a `CNAME` file, configure DNS
 - [ ] Real screenshots and a short demo video once the UI settles
 - [ ] Translate the home page (French, Polish) with `hreflang`

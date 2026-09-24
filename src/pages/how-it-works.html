@@ -20,7 +20,8 @@
       "description": "Architecture of Tethertone: capture, wire protocol, transport routes, jitter buffer and clock-drift correction.",
       "proficiencyLevel": "Expert",
       "datePublished": "{{releaseDate}}",
-      "dateModified": "{{releaseDate}}",
+      "dateModified": "{{updatedIso}}",
+      "publisher": { "@type": "Organization", "name": "Tethertone", "logo": { "@type": "ImageObject", "url": "{{siteUrl}}/icon-512.png" } },
       "image": "{{siteUrl}}/assets/img/og-image.png",
       "author": { "@type": "Organization", "name": "Tethertone contributors", "url": "{{repo}}" },
       "mainEntityOfPage": "{{siteUrl}}/how-it-works/"
@@ -33,6 +34,7 @@
     <ol class="breadcrumb"><li><a href="{{root}}">Home</a></li><li aria-current="page">How it works</li></ol>
     <h1>How it works</h1>
     <p class="lead">Two native apps and one small wire protocol. Here is how audio gets from Core Audio on a Mac to <code>AudioTrack</code> on a phone, and why it stays in sync.</p>
+    <p class="byline">By <a href="{{repo}}/graphs/contributors" rel="noopener">Tethertone contributors</a> · Updated <time datetime="{{updatedIso}}">{{updated}}</time></p>
   </div>
 </section>
 
@@ -41,6 +43,7 @@
     <details class="toc-collapsible" open>
       <summary>On this page</summary>
       <ol>
+        <li><a href="#short">In short</a></li>
         <li><a href="#overview">Overview</a></li>
         <li><a href="#capture">Capture on the Mac</a></li>
         <li><a href="#protocol">The wire protocol</a></li>
@@ -54,6 +57,16 @@
   </nav>
 
   <article class="prose">
+    <div class="tldr">
+      <h2 id="short">In short</h2>
+      <ul>
+        <li>The Mac captures the system mix (ScreenCaptureKit or BlackHole) and sends <strong>uncompressed 16-bit PCM in 10 ms packets</strong> over plain TCP.</li>
+        <li>The phone races every route in the QR code (USB, Wi-Fi, VPN) and keeps the first to answer.</li>
+        <li>A <strong>jitter buffer</strong> (90 ms by default) absorbs network hiccups, and playback runs a fraction of a percent fast or slow to cancel <strong>clock drift</strong>, so latency never creeps up.</li>
+        <li>A random token authenticates the phone; the audio itself is not encrypted.</li>
+      </ul>
+    </div>
+
     <h2 id="overview">Overview</h2>
     <p>The Mac is the <strong>server</strong>. It captures audio, cuts it into fixed packets and pushes them to every connected phone over TCP. The phone is the <strong>client</strong>. It connects, buffers, corrects for clock drift and plays.</p>
     <ol class="pipeline figure">

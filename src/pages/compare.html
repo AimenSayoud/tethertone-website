@@ -1,0 +1,112 @@
+<!--meta
+{
+  "slug": "compare",
+  "title": "Tethertone vs AudioRelay vs Airfoil: Mac to Android Audio",
+  "description": "An honest comparison of Tethertone, AudioRelay and Airfoil for streaming Mac audio to Android: price, open source, USB, audio quality, and when to pick each.",
+  "ogType": "article",
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{siteUrl}}/" },
+        { "@type": "ListItem", "position": 2, "name": "Compare", "item": "{{pageUrl}}" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Tethertone vs AudioRelay vs Airfoil for streaming Mac audio to Android",
+      "description": "Price, source code, connection types, audio format and best use for three ways to play a Mac's audio on an Android phone.",
+      "datePublished": "2026-09-24",
+      "dateModified": "{{updatedIso}}",
+      "image": "{{siteUrl}}/assets/img/og-image.png",
+      "author": { "@type": "Organization", "name": "Tethertone contributors", "url": "{{repo}}" },
+      "publisher": { "@type": "Organization", "name": "Tethertone", "logo": { "@type": "ImageObject", "url": "{{siteUrl}}/icon-512.png" } },
+      "mainEntityOfPage": "{{pageUrl}}"
+    }
+  ]
+}
+-->
+<section class="page-hero">
+  <div class="container">
+    <ol class="breadcrumb"><li><a href="{{root}}">Home</a></li><li aria-current="page">Compare</li></ol>
+    <h1>Tethertone vs AudioRelay vs Airfoil</h1>
+    <p class="lead">Three ways to play your Mac's audio on an Android phone. We make one of them, so every claim about the others links to its source, and we say where they do better.</p>
+    <p class="byline">By <a href="{{repo}}/graphs/contributors" rel="noopener">Tethertone contributors</a> · Checked <time datetime="{{updatedIso}}">{{updated}}</time></p>
+  </div>
+</section>
+
+<div class="container doc">
+  <nav class="toc" aria-label="On this page">
+    <details class="toc-collapsible" open>
+      <summary>On this page</summary>
+      <ol>
+        <li><a href="#short">In short</a></li>
+        <li><a href="#table">Side by side</a></li>
+        <li><a href="#tethertone">Tethertone</a></li>
+        <li><a href="#audiorelay">AudioRelay</a></li>
+        <li><a href="#airfoil">Airfoil</a></li>
+        <li><a href="#choose">Which should you pick?</a></li>
+        <li><a href="#sources">Sources</a></li>
+      </ol>
+    </details>
+  </nav>
+
+  <article class="prose">
+    <div class="tldr" id="short">
+      <h2>In short</h2>
+      <ul>
+        <li><strong>Tethertone</strong>: free, open source, no ads, uncompressed audio over USB or Wi-Fi. Mac to Android only.</li>
+        <li><strong>AudioRelay</strong>: free desktop apps for Windows, macOS and Linux; the Android app has ads and a paid Premium. Can also use the phone as a microphone.</li>
+        <li><strong>Airfoil</strong>: a paid Mac app that streams to many kinds of receivers at once. The Android receiver, Airfoil Satellite, is free.</li>
+      </ul>
+    </div>
+
+    <h2 id="table">Side by side</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th scope="col"></th><th scope="col">Tethertone</th><th scope="col">AudioRelay</th><th scope="col">Airfoil + Satellite</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Mac app</th><td>Free</td><td>Free</td><td>Paid license</td></tr>
+          <tr><th scope="row">Android app</th><td>Free, no ads</td><td>Free with ads; paid Premium</td><td>Free (Airfoil Satellite)</td></tr>
+          <tr><th scope="row">Source code</th><td>Open source, MIT</td><td>Closed</td><td>Closed</td></tr>
+          <tr><th scope="row">USB connection</th><td>Yes (adb reverse)</td><td>Yes</td><td>No; over the network</td></tr>
+          <tr><th scope="row">Audio format</th><td>Uncompressed 16-bit PCM</td><td>Compressed</td><td>Not compared here</td></tr>
+          <tr><th scope="row">Other computers</th><td>macOS only</td><td>Windows, macOS, Linux</td><td>Mac app</td></tr>
+          <tr><th scope="row">Phone as microphone</th><td>No</td><td>Yes</td><td>Not listed</td></tr>
+          <tr><th scope="row">Many receivers at once</th><td>Yes (tested with two phones)</td><td>With Premium</td><td>Yes, its main purpose</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 id="tethertone">Tethertone</h2>
+    <p>A native SwiftUI app on the Mac and a Kotlin app on Android, built for one job. It captures the system mix with ScreenCaptureKit (or reads BlackHole) and sends uncompressed PCM in 10 ms packets. The phone plays it through a jitter buffer that corrects clock drift continuously, so latency stays flat for hours. It pairs with one QR scan and uses a USB cable automatically when one is plugged in.</p>
+    <p><strong>Where it falls short:</strong> no Windows or Linux sender, no phone-as-microphone mode, and uncompressed audio uses about 1.5 Mbit/s. The <a href="{{root}}how-it-works/">technical deep dive</a> explains how it works.</p>
+
+    <h2 id="audiorelay">AudioRelay</h2>
+    <p>A cross-platform app that streams audio and the microphone between computers and Android devices over Wi-Fi or USB. The desktop apps are free. The Android app is free with ads, and a Premium purchase unlocks extras such as more than one connected device and a custom buffer setting. It compresses audio to reduce network traffic.</p>
+    <p><strong>Choose it if</strong> you also need Windows or Linux, or want to use your phone as a microphone for the computer.</p>
+
+    <h2 id="airfoil">Airfoil</h2>
+    <p>Rogue Amoeba's Airfoil for Mac sends audio to many kinds of receivers around the house. Airfoil Satellite, the free companion app, turns an Android device into one of those receivers and can control Airfoil remotely. Airfoil itself is a paid app.</p>
+    <p><strong>Choose it if</strong> you want whole-house audio across several different speakers, and don't mind paying for polished commercial software.</p>
+
+    <h2 id="choose">Which should you pick?</h2>
+    <ul>
+      <li><strong>Just want your phone as a Mac speaker, free and without ads?</strong> Tethertone.</li>
+      <li><strong>On Windows or Linux, or need the phone's microphone?</strong> AudioRelay.</li>
+      <li><strong>Want music in several rooms at once?</strong> Airfoil.</li>
+      <li><strong>Care about auditing the code or changing it?</strong> Tethertone is the only open-source option of the three.</li>
+    </ul>
+    <p>Ready to try Tethertone? <a href="{{root}}download/">Download it</a> and follow the <a href="{{root}}guide/">two-minute setup</a>.</p>
+
+    <h2 id="sources">Sources</h2>
+    <p>Prices and features change; check each vendor's page before deciding. Checked <time datetime="{{updatedIso}}">{{updated}}</time>.</p>
+    <ul>
+      <li>AudioRelay: <a href="https://play.google.com/store/apps/details?id=com.azefsw.audioconnect" rel="noopener">Google Play listing</a> and <a href="https://alternativeto.net/software/audiorelay/about" rel="noopener">AlternativeTo profile</a></li>
+      <li>Airfoil: <a href="https://rogueamoeba.com/airfoil/mac/" rel="noopener">Airfoil for Mac</a> and <a href="https://rogueamoeba.com/airfoil/satellite/android/" rel="noopener">Airfoil Satellite for Android</a></li>
+      <li>Tethertone: <a href="{{repo}}" rel="noopener">source code</a> and <a href="{{repo}}/blob/main/docs/ARCHITECTURE.md" rel="noopener">architecture</a></li>
+    </ul>
+  </article>
+</div>

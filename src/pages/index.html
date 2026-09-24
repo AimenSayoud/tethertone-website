@@ -33,6 +33,15 @@
     },
     {
       "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Tethertone",
+      "alternateName": "AudioBridge",
+      "url": "{{siteUrl}}/",
+      "logo": "{{siteUrl}}/icon-512.png",
+      "sameAs": ["{{repo}}"]
+    },
+    {
+      "@context": "https://schema.org",
       "@type": "SoftwareSourceCode",
       "name": "Tethertone",
       "codeRepository": "{{repo}}",
@@ -316,6 +325,20 @@ cd ../android
       <details><summary>Does it work with iPhone, Windows or Linux?</summary><div class="answer"><p>Not yet. The sender is a macOS app and the receiver is an Android app. The wire protocol is documented, so other senders and receivers can be built on it.</p></div></details>
       <details><summary>How much data does streaming use?</summary><div class="answer"><p>About 1.5 Mbit/s, roughly 690 MB per hour, because the audio is uncompressed 16-bit stereo PCM. That is nothing over USB or home Wi-Fi, but expensive on a metered mobile connection.</p></div></details>
       <details><summary>Can several phones listen at the same time?</summary><div class="answer"><p>Yes. The Mac serves any number of phones at once, each with its own send queue so a slow phone cannot hold up the others. It has been tested with two.</p></div></details>
+    </div>
+  </div>
+</section>
+
+<section class="section section-soft" aria-labelledby="guides-title">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Guides</p>
+      <h2 id="guides-title">Learn more</h2>
+    </div>
+    <div class="guide-links">
+      <a class="guide-link" href="{{root}}android-phone-as-mac-speaker/"><b>Use your Android phone as a Mac speaker</b><span>Why Bluetooth won't do it, and the options that work.</span></a>
+      <a class="guide-link" href="{{root}}compare/"><b>Tethertone vs AudioRelay vs Airfoil</b><span>An honest comparison, with sources.</span></a>
+      <a class="guide-link" href="{{root}}how-it-works/"><b>How Tethertone works</b><span>Protocol, jitter buffer and clock-drift correction.</span></a>
     </div>
   </div>
 </section>

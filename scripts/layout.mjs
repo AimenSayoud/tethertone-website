@@ -54,6 +54,7 @@ ${meta.noindex ? '<meta name="robots" content="noindex">' : '<meta name="robots"
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="${config.themeColor}">
 <meta name="color-scheme" content="light dark">
 <meta name="author" content="Tethertone contributors">
+${config.verification?.google ? `<meta name="google-site-verification" content="${esc(config.verification.google)}">\n` : ''}${config.verification?.bing ? `<meta name="msvalidate.01" content="${esc(config.verification.bing)}">\n` : ''}
 <meta property="og:type" content="${meta.ogType || 'website'}">
 <meta property="og:site_name" content="${config.name}">
 <meta property="og:locale" content="${config.locale}">
@@ -123,6 +124,8 @@ ${body}
       <ul>
         <li><a href="${root}download/">Download</a></li>
         <li><a href="${root}guide/">Setup guide</a></li>
+        <li><a href="${root}android-phone-as-mac-speaker/">Android phone as a Mac speaker</a></li>
+        <li><a href="${root}compare/">Compare alternatives</a></li>
         <li><a href="${root}how-it-works/">How it works</a></li>
         <li><a href="${root}#faq">FAQ</a></li>
       </ul>

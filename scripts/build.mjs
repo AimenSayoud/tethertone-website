@@ -5,6 +5,7 @@
 // followed by the page body. Placeholders in {{double braces}} are replaced
 // from the table below; {{root}} becomes the relative path to the site root.
 
+import { execFileSync } from 'node:child_process';
 import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -20,6 +21,7 @@ const nav = [
   { slug: 'index', label: 'Features', href: '#features' },
   { slug: 'how-it-works', label: 'How it works', href: 'how-it-works/' },
   { slug: 'guide', label: 'Setup guide', href: 'guide/' },
+  { slug: 'compare', label: 'Compare', href: 'compare/' },
   { slug: 'open-source', label: 'Open source', href: 'open-source/' },
 ];
 
@@ -53,9 +55,10 @@ const placeholders = {
   'icon.globe': icons.globe,
 };
 
-function fill(text, root) {
+function fill(text, root, local = {}) {
   return text.replace(/\{\{\s*([\w.]+)\s*\}\}/g, (match, key) => {
     if (key === 'root') return root;
+    if (key in local) return local[key];
     if (key in placeholders) return placeholders[key];
     throw new Error(`unknown placeholder ${match}`);
   });
@@ -71,6 +74,21 @@ function parsePage(file) {
   }
   return { meta, body: raw.slice(m[0].length) };
 }
+
+// A page's date is the date its content last changed: the last commit that
+// touched its source, or today if it has uncommitted edits. The same date goes
+// in the visible byline, the JSON-LD and the sitemap, so the three agree.
+const today = new Date().toISOString().slice(0, 10);
+function lastModified(path) {
+  try {
+    const dirty = execFileSync('git', ['status', '--porcelain', '--', path], { encoding: 'utf8' }).trim();
+    if (dirty) return today;
+    return execFileSync('git', ['log', '-1', '--format=%cs', '--', path], { encoding: 'utf8' }).trim() || today;
+  } catch {
+    return today;
+  }
+}
+const humanDate = (iso) => new Date(`${iso}T12:00:00Z`).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
 
 rmSync(DIST, { recursive: true, force: true });
 mkdirSync(DIST, { recursive: true });
@@ -89,19 +107,22 @@ for (const file of readdirSync(join(SRC, 'pages')).filter((f) => f.endsWith('.ht
   const outPath = isHome ? 'index.html' : is404 ? '404.html' : `${meta.slug}/index.html`;
   const url = isHome ? `${config.siteUrl}/` : `${config.siteUrl}/${meta.slug}/`;
 
+  const updatedIso = lastModified(join(SRC, 'pages', file));
+  const local = { updatedIso, updated: humanDate(updatedIso), pageUrl: url };
+
   // Metadata values may use placeholders too (JSON-LD download URLs, etc.).
-  const filledMeta = JSON.parse(fill(JSON.stringify(meta), root));
-  const html = renderPage({ meta: filledMeta, body: fill(body, root), root, url, config, nav });
+  const filledMeta = JSON.parse(fill(JSON.stringify(meta), root, local));
+  const html = renderPage({ meta: filledMeta, body: fill(body, root, local), root, url, config, nav });
 
   mkdirSync(dirname(join(DIST, outPath)), { recursive: true });
   writeFileSync(join(DIST, outPath), html);
-  if (!meta.noindex) sitemap.push({ url, priority: meta.priority ?? (isHome ? '1.0' : '0.8') });
+  if (!meta.noindex) sitemap.push({ url, lastmod: updatedIso, title: filledMeta.title, description: filledMeta.description, llms: meta.llms });
   console.log(`  ${outPath}`);
 }
 
 writeFileSync(join(DIST, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${sitemap.map((p) => `  <url><loc>${p.url}</loc><lastmod>${new Date().toISOString().slice(0, 10)}</lastmod><priority>${p.priority}</priority></url>`).join('\n')}
+${sitemap.map((p) => `  <url><loc>${p.url}</loc><lastmod>${p.lastmod}</lastmod></url>`).join('\n')}
 </urlset>
 `);
 
@@ -124,6 +145,29 @@ writeFileSync(join(DIST, 'site.webmanifest'), JSON.stringify({
     { src: 'icon-512.png', sizes: '512x512', type: 'image/png' },
   ],
 }, null, 2));
+
+// llms.txt: a plain-text map of the site for AI agents (llmstxt.org). Cheap
+// to publish; search engines ignore it, some agents read it.
+writeFileSync(join(DIST, 'llms.txt'), `# ${config.name}
+
+> ${config.name} (formerly AudioBridge) is a free, open-source (MIT) app pair that streams a Mac's system audio to an Android phone over USB or Wi-Fi as uncompressed 16-bit PCM, with QR pairing, a jitter buffer and continuous clock-drift correction. macOS 14+ sender (SwiftUI) and Android 8+ receiver (Kotlin). No account, no cloud, no tracking.
+
+Current version: ${v}. Source code: ${config.repo}
+
+## Pages
+
+${sitemap.map((p) => `- [${p.title}](${p.url}): ${p.description}`).join('\n')}
+
+## Reference
+
+- [Wire protocol](${config.repo}/blob/main/docs/PROTOCOL.md): the TCP protocol between the Mac and the phone
+- [Architecture](${config.repo}/blob/main/docs/ARCHITECTURE.md): capture, transport, jitter buffer, drift correction
+- [Troubleshooting](${config.repo}/blob/main/docs/TROUBLESHOOTING.md): permissions, connection problems, remote access
+- [Changelog](${config.repo}/blob/main/CHANGELOG.md)
+`);
+
+// IndexNow proves ownership with a key file at the site root.
+if (config.indexNowKey) writeFileSync(join(DIST, `${config.indexNowKey}.txt`), config.indexNowKey);
 
 // Pages would otherwise run Jekyll over the output and skip some files.
 writeFileSync(join(DIST, '.nojekyll'), '');

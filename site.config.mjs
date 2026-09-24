@@ -12,5 +12,14 @@ export default {
   version: '0.2.0',
   releaseDate: '2026-09-24',
   themeColor: '#0b1120',
+  // Search engine ownership verification. Paste the content value of the
+  // <meta> tag each service gives you; empty values render nothing.
+  verification: {
+    google: '',   // Google Search Console → HTML tag → google-site-verification
+    bing: '',     // Bing Webmaster Tools → HTML Meta Tag → msvalidate.01
+  },
+  // IndexNow (Bing, Yandex, Seznam, Naver): the key file is published at
+  // /<key>.txt and CI submits every page after each deploy.
+  indexNowKey: '561637f40f83ff5e6998b2b713a30ec2',
   locale: 'en_US',
 };

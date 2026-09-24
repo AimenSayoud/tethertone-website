@@ -16,6 +16,7 @@
     {
       "@context": "https://schema.org",
       "@type": "HowTo",
+      "dateModified": "{{updatedIso}}",
       "name": "How to stream your Mac's audio to an Android phone",
       "description": "Use Tethertone to play everything your Mac plays on an Android phone, over USB or Wi-Fi.",
       "totalTime": "PT2M",
@@ -35,6 +36,7 @@
     <ol class="breadcrumb"><li><a href="{{root}}">Home</a></li><li aria-current="page">Setup guide</li></ol>
     <h1>Setup guide</h1>
     <p class="lead">Everything from the first pairing to using your phone as a Mac speaker away from home, plus fixes for the problems people actually hit.</p>
+    <p class="byline">By <a href="{{repo}}/graphs/contributors" rel="noopener">Tethertone contributors</a> · Updated <time datetime="{{updatedIso}}">{{updated}}</time></p>
   </div>
 </section>
 
@@ -43,6 +45,7 @@
     <details class="toc-collapsible" open>
       <summary>On this page</summary>
       <ol>
+        <li><a href="#short">In short</a></li>
         <li><a href="#install">1. Install</a></li>
         <li><a href="#pair">2. Pair and play</a></li>
         <li><a href="#capture">Capture methods</a></li>
@@ -56,6 +59,16 @@
   </nav>
 
   <article class="prose">
+    <div class="tldr">
+      <h2 id="short">In short</h2>
+      <ol>
+        <li>Install the Mac app (macOS 14+) and the Android app (Android 8.0+).</li>
+        <li>Press <strong>Start</strong> on the Mac and allow the one permission macOS asks for.</li>
+        <li>Tap <strong>Scan pairing QR</strong> on the phone and scan the code on the Mac's Pairing tab.</li>
+      </ol>
+      <p>Plug in a USB cable for the lowest latency; Wi-Fi works with no extra setup.</p>
+    </div>
+
     <h2 id="install">1. Install</h2>
     <p>Get both apps from the <a href="{{root}}download/">download page</a>: the macOS app sends, the Android app plays. You need macOS 14 Sonoma or later and Android 8.0 or later.</p>
 

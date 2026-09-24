@@ -1,0 +1,119 @@
+<!--meta
+{
+  "slug": "android-phone-as-mac-speaker",
+  "title": "How to Use Your Android Phone as a Mac Speaker",
+  "description": "Three working ways to play your Mac's audio on an Android phone, why Bluetooth won't do it, and a free, open-source setup over USB or Wi-Fi in two minutes.",
+  "ogType": "article",
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{siteUrl}}/" },
+        { "@type": "ListItem", "position": 2, "name": "Android phone as a Mac speaker", "item": "{{pageUrl}}" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "How to use your Android phone as a Mac speaker",
+      "description": "Three working ways to play a Mac's audio on an Android phone, why Bluetooth won't do it, and a step-by-step free setup over USB or Wi-Fi.",
+      "datePublished": "2026-09-24",
+      "dateModified": "{{updatedIso}}",
+      "image": "{{siteUrl}}/assets/img/og-image.png",
+      "author": { "@type": "Organization", "name": "Tethertone contributors", "url": "{{repo}}" },
+      "publisher": { "@type": "Organization", "name": "Tethertone", "logo": { "@type": "ImageObject", "url": "{{siteUrl}}/icon-512.png" } },
+      "mainEntityOfPage": "{{pageUrl}}"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "Can I connect my Mac to my Android phone as a Bluetooth speaker?", "acceptedAnswer": { "@type": "Answer", "text": "Usually not. A Mac sends audio to Bluetooth devices that present themselves as speakers or headphones, and most Android phones don't: they are built to send audio to speakers, not to receive it. You need an app on both devices instead." } },
+        { "@type": "Question", "name": "What is the lowest-latency way to play Mac audio on an Android phone?", "acceptedAnswer": { "@type": "Answer", "text": "A USB cable. With Tethertone the phone connects through adb reverse over the cable, which avoids Wi-Fi congestion entirely, and you can lower the jitter buffer to around 40–60 ms." } },
+        { "@type": "Question", "name": "Is there a free way to use an Android phone as a Mac speaker?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Tethertone is free and open source under the MIT License, with no ads or account. AudioRelay also has free desktop apps and a free Android app with ads and an optional paid upgrade." } }
+      ]
+    }
+  ]
+}
+-->
+<section class="page-hero">
+  <div class="container">
+    <ol class="breadcrumb"><li><a href="{{root}}">Home</a></li><li aria-current="page">Android phone as a Mac speaker</li></ol>
+    <h1>How to use your Android phone as a Mac speaker</h1>
+    <p class="lead">Your Mac can't simply pair with an Android phone as a Bluetooth speaker. Here's why, the three approaches that do work, and a free setup over USB or Wi-Fi.</p>
+    <p class="byline">By <a href="{{repo}}/graphs/contributors" rel="noopener">Tethertone contributors</a> · Updated <time datetime="{{updatedIso}}">{{updated}}</time></p>
+  </div>
+</section>
+
+<div class="container doc">
+  <nav class="toc" aria-label="On this page">
+    <details class="toc-collapsible" open>
+      <summary>On this page</summary>
+      <ol>
+        <li><a href="#short">In short</a></li>
+        <li><a href="#bluetooth">Why Bluetooth doesn't work</a></li>
+        <li><a href="#options">Your options</a></li>
+        <li><a href="#setup">Set it up in two minutes</a></li>
+        <li><a href="#tips">Tips for the best sound</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ol>
+    </details>
+  </nav>
+
+  <article class="prose">
+    <div class="tldr" id="short">
+      <h2>In short</h2>
+      <ul>
+        <li>Most Android phones can't act as a Bluetooth speaker for a Mac, so you need an app on both devices.</li>
+        <li>Free options: <strong>Tethertone</strong> (open source, no ads, lossless) and <strong>AudioRelay</strong> (free, with ads on Android). Paid: <strong>Airfoil</strong> with the free Airfoil Satellite receiver.</li>
+        <li>For the lowest latency, connect with a <strong>USB cable</strong>. Wi-Fi works well on most home networks.</li>
+      </ul>
+    </div>
+
+    <h2 id="bluetooth">Why Bluetooth doesn't work</h2>
+    <p>Bluetooth audio has a sender and a receiver. A Mac is a sender: it lists headphones and speakers that advertise themselves as audio receivers. Phones are built the same way round: they send music <em>to</em> speakers and earbuds. Most Android phones don't offer to <em>receive</em> audio, so they never show up as an output in your Mac's Sound settings.</p>
+    <p>So the audio has to travel another way: over your network or a USB cable, carried by an app on each side.</p>
+
+    <h2 id="options">Your options</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th scope="col"></th><th scope="col">Tethertone</th><th scope="col">AudioRelay</th><th scope="col">Airfoil + Satellite</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Price</th><td>Free</td><td>Free; Android has ads and a paid Premium</td><td>Paid Mac app; receiver is free</td></tr>
+          <tr><th scope="row">Source code</th><td>Open source (MIT)</td><td>Closed</td><td>Closed</td></tr>
+          <tr><th scope="row">Connection</th><td>USB or Wi-Fi</td><td>USB or Wi-Fi</td><td>Network</td></tr>
+          <tr><th scope="row">Audio</th><td>Uncompressed PCM</td><td>Compressed</td><td>—</td></tr>
+          <tr><th scope="row">Best for</th><td>Free, private, lossless</td><td>Also phone-as-microphone</td><td>Many speakers around the house</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>The <a href="{{root}}compare/">full comparison</a> covers the differences and when to pick each one, with sources.</p>
+
+    <h2 id="setup">Set it up in two minutes</h2>
+    <p>With Tethertone:</p>
+    <ol>
+      <li><strong>Install both apps</strong> from the <a href="{{root}}download/">download page</a>: the Mac app (macOS 14 or later) and the Android app (Android 8.0 or later).</li>
+      <li><strong>Start the Mac app.</strong> Open Tethertone and press <strong>Start</strong>. macOS asks once for permission to capture the system audio.</li>
+      <li><strong>Pair the phone.</strong> Tap <strong>Scan pairing QR</strong> on the phone and point it at the code on the Mac's Pairing tab.</li>
+      <li><strong>Play something.</strong> Everything the Mac plays now comes out of the phone. Next time, just press Start; the phone reconnects by itself.</li>
+    </ol>
+    <p>The <a href="{{root}}guide/">setup guide</a> covers USB, BlackHole and troubleshooting in detail.</p>
+
+    <h2 id="tips">Tips for the best sound</h2>
+    <ul>
+      <li><strong>Use the cable for video.</strong> USB avoids Wi-Fi congestion, so you can lower the phone's jitter buffer and keep lips in sync.</li>
+      <li><strong>Raise the buffer if it stutters.</strong> A bigger buffer adds a little delay but absorbs network hiccups. Watch the phone's <em>underruns</em> counter.</li>
+      <li><strong>Keep the phone playing with the screen off.</strong> If your phone stops background apps, exempt Tethertone from battery optimisation.</li>
+      <li><strong>Mind mobile data.</strong> Uncompressed audio is about 690 MB per hour. That's fine on Wi-Fi, but expensive on a metered plan.</li>
+    </ul>
+
+    <h2 id="faq">FAQ</h2>
+    <h3>Can I connect my Mac to my Android phone as a Bluetooth speaker?</h3>
+    <p>Usually not. A Mac sends audio to Bluetooth devices that present themselves as speakers or headphones, and most Android phones don't: they are built to send audio to speakers, not to receive it. You need an app on both devices instead.</p>
+    <h3>What is the lowest-latency way to play Mac audio on an Android phone?</h3>
+    <p>A USB cable. With Tethertone the phone connects through adb reverse over the cable, which avoids Wi-Fi congestion entirely, and you can lower the jitter buffer to around 40–60 ms.</p>
+    <h3>Is there a free way to use an Android phone as a Mac speaker?</h3>
+    <p>Yes. Tethertone is free and open source under the MIT License, with no ads or account. AudioRelay also has free desktop apps and a free Android app with ads and an optional paid upgrade.</p>
+  </article>
+</div>
